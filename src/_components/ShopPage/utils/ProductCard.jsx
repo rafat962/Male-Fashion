@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Rating } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -36,14 +37,19 @@ const ProductCard = ({ product }) => {
             </div>
 
             {/* ── Image Section ──────────────────────────────── */}
-            <div className="relative overflow-hidden aspect-square bg-bg-light p-2 sm:p-4 shrink-0">
+            <Link
+                to={`/product/${product.id}`}
+                className="relative block overflow-hidden aspect-square bg-bg-light p-2 sm:p-4 shrink-0"
+            >
                 <img
                     src={product.image}
                     alt={product.name}
                     className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
                 />
+            </Link>
 
-                {/* Wishlist button */}
+            {/* Wishlist button */}
+            <div className="absolute top-2 right-2 z-20 flex flex-col gap-1">
                 <button
                     onClick={() => toggleWishlist(product)}
                     className="absolute top-2 right-2 w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center
@@ -71,9 +77,12 @@ const ProductCard = ({ product }) => {
                     {product.category}
                 </p>
 
-                <h6 className="text-xs sm:text-sm font-bold text-dark leading-tight mb-1 line-clamp-2 h-8 sm:h-10">
+                <Link
+                    to={`/product/${product.id}`}
+                    className="text-xs sm:text-sm font-bold text-dark leading-tight mb-1 line-clamp-2 h-8 sm:h-10 hover:text-primary transition-colors"
+                >
                     {product.name}
-                </h6>
+                </Link>
 
                 {/* Rating */}
                 <div className="flex items-center gap-1 mb-2">

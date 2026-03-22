@@ -156,16 +156,17 @@ const CartPage = () => {
                                 >
                                     {/* Product info */}
                                     <div className="flex items-center gap-4">
-                                        <div
+                                        <Link
+                                            to={`/product/${item.id}`}
                                             className="w-20 h-20 bg-[#f8f8f8] border
                                                         border-[#efefef] shrink-0 overflow-hidden"
                                         >
                                             <img
                                                 src={item.image}
                                                 alt={item.name}
-                                                className="w-full h-full object-contain p-2"
+                                                className="w-full h-full object-contain p-2 hover:scale-105 transition-transform"
                                             />
-                                        </div>
+                                        </Link>
                                         <div>
                                             <p
                                                 className="text-[10px] font-bold uppercase
@@ -173,9 +174,12 @@ const CartPage = () => {
                                             >
                                                 {item.category}
                                             </p>
-                                            <h6 className="text-sm font-bold text-[#111] leading-snug">
+                                            <Link
+                                                to={`/product/${item.id}`}
+                                                className="text-sm font-bold text-[#111] leading-snug hover:text-primary transition-colors"
+                                            >
                                                 {item.name}
-                                            </h6>
+                                            </Link>
                                             <p className="text-sm font-black text-primary mt-1">
                                                 ${item.price.toFixed(2)}
                                             </p>

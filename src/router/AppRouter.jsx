@@ -6,6 +6,7 @@ import CartPage from "../_components/CartPage/CartPage";
 import ContactPage from "../_components/Contact/Contactpage";
 import BlogPage from "../_components/Blog/Blog";
 import WishlistPage from "../_components/Wishlistpage/Wishlistpage";
+import ProductDetails from "../_components/ProductDetails/ProductDetails";
 
 const AppRouter = () => {
     return (
@@ -14,6 +15,7 @@ const AppRouter = () => {
                 <Route element={<Layout />}>
                     <Route index element={<HomePage />} />
                     <Route path="shop" element={<ShopPage />} />
+                    <Route path="product/:id" element={<ProductDetails />} />
                     <Route path="cart" element={<CartPage />} />
                     <Route path="contact" element={<ContactPage />} />
                     <Route path="blog" element={<BlogPage />} />

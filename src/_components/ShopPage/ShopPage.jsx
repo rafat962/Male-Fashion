@@ -3,12 +3,12 @@ import { useState, useMemo } from "react";
 import { Select, MenuItem } from "@mui/material";
 import { motion, AnimatePresence } from "framer-motion"; // استيراد framer-motion
 import ProductCard from "./utils/ProductCard";
-import ShopSidebar from "./utils/ShopSidebar";
+import ShopSidebar from "./utils/Shopsidebar";
 import {
     filterProducts,
     SORT_OPTIONS,
     PRODUCTS_PER_PAGE,
-} from "./utils/shopPage.utils";
+} from "./utils/Shoppage.utils";
 import Breadcrumb from "../../_shared/ui/Breadcrumb";
 
 const INITIAL_FILTERS = {
