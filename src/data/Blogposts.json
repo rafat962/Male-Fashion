@@ -1,0 +1,92 @@
+[
+    {
+        "id": 1,
+        "title": "What Curling Irons Are The Best Ones",
+        "excerpt": "Discover the top-rated curling irons that stylists swear by. From ceramic to titanium, we break down the best options for every hair type.",
+        "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=600&q=80",
+        "date": "16 February 2024",
+        "author": "James Miller",
+        "category": "Style",
+        "readTime": "4 min read"
+    },
+    {
+        "id": 2,
+        "title": "Eternity Bands Do Last Forever",
+        "excerpt": "The eternity band has stood the test of time as a symbol of endless love. We explore the history and modern takes on this timeless piece.",
+        "image": "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=600&q=80",
+        "date": "21 February 2024",
+        "author": "Sarah Lane",
+        "category": "Accessories",
+        "readTime": "3 min read"
+    },
+    {
+        "id": 3,
+        "title": "The Health Benefits Of Sunglasses",
+        "excerpt": "Beyond looking cool, sunglasses protect your eyes from UV rays and reduce the risk of cataracts. Here's what to look for when buying your next pair.",
+        "image": "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=600&q=80",
+        "date": "28 February 2024",
+        "author": "Tom Harris",
+        "category": "Health",
+        "readTime": "5 min read"
+    },
+    {
+        "id": 4,
+        "title": "Aiming For Higher: The Mastopexy",
+        "excerpt": "A deep dive into the science and artistry of modern fashion tailoring. How master craftsmen are redefining the silhouette for the contemporary man.",
+        "image": "https://images.unsplash.com/photo-1490114538077-0a7f8cb49891?auto=format&fit=crop&w=600&q=80",
+        "date": "16 March 2024",
+        "author": "James Miller",
+        "category": "Fashion",
+        "readTime": "6 min read"
+    },
+    {
+        "id": 5,
+        "title": "Wedding Rings: A Gift For A Lifetime",
+        "excerpt": "Choosing the perfect wedding ring is one of the most important decisions you'll make. Our complete guide covers metals, styles, and budgeting tips.",
+        "image": "https://images.unsplash.com/photo-1591561954557-26941169b49e?auto=format&fit=crop&w=600&q=80",
+        "date": "21 March 2024",
+        "author": "Sarah Lane",
+        "category": "Accessories",
+        "readTime": "4 min read"
+    },
+    {
+        "id": 6,
+        "title": "The Different Methods Of Hair Removal",
+        "excerpt": "From razors to laser treatments, we compare the most popular hair removal methods for men \u2014 cost, pain levels, and long-term results.",
+        "image": "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=600&q=80",
+        "date": "28 March 2024",
+        "author": "Tom Harris",
+        "category": "Grooming",
+        "readTime": "5 min read"
+    },
+    {
+        "id": 7,
+        "title": "Hoop Earrings: A Style From History",
+        "excerpt": "Hoop earrings have been worn across cultures for thousands of years. Today they're back in a big way \u2014 here's how to style them for 2024.",
+        "image": "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=600&q=80",
+        "date": "5 April 2024",
+        "author": "Sarah Lane",
+        "category": "Style",
+        "readTime": "3 min read"
+    },
+    {
+        "id": 8,
+        "title": "Lasik Eye Surgery: Are You Ready?",
+        "excerpt": "Thinking about ditching your glasses for good? We speak to ophthalmologists about who makes the best candidate for Lasik and what to expect post-surgery.",
+        "image": "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=600&q=80",
+        "date": "12 April 2024",
+        "author": "James Miller",
+        "category": "Health",
+        "readTime": "7 min read"
+    },
+    {
+        "id": 9,
+        "title": "Spring Fashion Trends For Men 2024",
+        "excerpt": "Pastel tones, relaxed tailoring, and statement sneakers \u2014 spring 2024 is all about effortless style. Here are the key trends you need to know.",
+        "image": "https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?auto=format&fit=crop&w=600&q=80",
+        "date": "20 April 2024",
+        "author": "Tom Harris",
+        "category": "Fashion",
+        "readTime": "5 min read"
+    }
+]

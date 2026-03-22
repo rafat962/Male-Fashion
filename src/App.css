@@ -1,0 +1,168 @@
+/* ─── Google Fonts ─────────────────────────────────────── */
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;600;700;900&display=swap");
+/* ─── Tailwind v4 ──────────────────────────────────────── */
+@import "tailwindcss";
+/* ─── Testemonial ──────────────────────────────────────── */
+@keyframes marquee {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(calc(-100% - var(--gap)));
+    }
+}
+
+.animate-marquee {
+    animation: marquee var(--duration) linear infinite;
+}
+
+.direction-reverse {
+    animation-direction: reverse !important;
+}
+
+.hover-pause:hover .animate-marquee {
+    animation-play-state: paused;
+}
+/* ─── Design Tokens (Tailwind v4 @theme) ───────────────── */
+@theme {
+    /* Colors */
+    --color-primary: #e53637;
+    --color-primary-dark: #c0292a;
+    --color-primary-light: #fdecea;
+
+    --color-dark: #1c1c1c;
+    --color-dark-soft: #333333;
+
+    --color-sub: #6b6b6b;
+    --color-border: #e0e0e0;
+    --color-bg-gray: #f5f5f5;
+    --color-bg-light: #fafafa;
+
+    /* Font */
+    --font-sans: "Lato", sans-serif;
+
+    /* Shadows */
+    --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.08);
+    --shadow-card-hover: 0 8px 24px rgba(0, 0, 0, 0.14);
+    --shadow-nav: 0 2px 8px rgba(0, 0, 0, 0.06);
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    @keyframes shimmer {
+        from {
+            background-position: -200% 0;
+        }
+        to {
+            background-position: 200% 0;
+        }
+    }
+}
+
+/* ─── Base Reset ───────────────────────────────────────── */
+@layer base {
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: var(--font-sans);
+        color: var(--color-dark);
+        background-color: #ffffff;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+        transition: color 0.3s ease;
+    }
+
+    img {
+        max-width: 100%;
+        display: block;
+    }
+    ul {
+        list-style: none;
+    }
+}
+@utility scrollbar-hide {
+    /* IE and Edge */
+    -ms-overflow-style: none;
+    /* Firefox */
+    scrollbar-width: none;
+    /* Safari and Chrome */
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+/* ─── Reusable Component Classes ───────────────────────── */
+@layer components {
+    .container-main {
+        @apply max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8;
+    }
+
+    .section-padding {
+        @apply py-16 lg:py-20;
+    }
+
+    .section-subtitle {
+        @apply text-xs uppercase tracking-[0.2em] text-primary font-bold text-center mb-2;
+    }
+
+    .section-title {
+        @apply text-3xl font-bold text-dark text-center mb-10;
+    }
+
+    .btn-primary {
+        @apply bg-primary text-white px-8 py-3 font-bold uppercase tracking-[0.15em]
+           text-sm transition-all duration-300 cursor-pointer
+           hover:bg-primary-dark hover:-translate-y-0.5;
+    }
+
+    .btn-outline {
+        @apply border border-dark text-dark px-8 py-3 font-bold uppercase
+           tracking-[0.15em] text-sm transition-all duration-300 cursor-pointer
+           hover:bg-dark hover:text-white;
+    }
+
+    .badge-new {
+        @apply absolute top-3 left-3 bg-primary text-white text-[0.6rem]
+           font-bold uppercase tracking-widest px-2 py-0.5 z-10;
+    }
+
+    .badge-sale {
+        @apply absolute top-3 left-3 bg-dark text-white text-[0.6rem]
+           font-bold uppercase tracking-widest px-2 py-0.5 z-10;
+    }
+
+    .nav-link {
+        @apply text-sm font-bold uppercase tracking-[0.15em] text-dark
+           transition-colors duration-300 hover:text-primary;
+    }
+
+    .nav-link-active {
+        @apply text-primary;
+    }
+}
