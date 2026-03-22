@@ -126,14 +126,17 @@ const WishlistPage = () => {
                             )}
 
                             {/* Image */}
-                            <div className="aspect-square bg-[#f8f8f8] overflow-hidden p-4">
+                            <Link
+                                to={`/product/${product.id}`}
+                                className="block aspect-square bg-[#f8f8f8] overflow-hidden p-4"
+                            >
                                 <img
                                     src={product.image}
                                     alt={product.name}
                                     className="w-full h-full object-contain group-hover:scale-105
                                                transition-transform duration-500"
                                 />
-                            </div>
+                            </Link>
 
                             {/* Info */}
                             <div className="p-4">
@@ -143,9 +146,12 @@ const WishlistPage = () => {
                                 >
                                     {product.category}
                                 </p>
-                                <h6 className="text-sm font-bold text-[#111] line-clamp-1 mb-1">
+                                <Link
+                                    to={`/product/${product.id}`}
+                                    className="block text-sm font-bold text-[#111] line-clamp-1 mb-1 hover:text-primary transition-colors"
+                                >
                                     {product.name}
-                                </h6>
+                                </Link>
                                 <p className="text-base font-black text-primary mb-3">
                                     ${product.price.toFixed(2)}
                                 </p>

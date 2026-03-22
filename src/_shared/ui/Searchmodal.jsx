@@ -133,13 +133,17 @@ const SearchModal = ({ open, onClose }) => {
                                                            transition-colors duration-200"
                                             >
                                                 {/* Image */}
-                                                <div className="w-16 h-16 bg-[#f8f8f8] shrink-0 overflow-hidden">
+                                                <Link
+                                                    to={`/product/${product.id}`}
+                                                    onClick={onClose}
+                                                    className="w-16 h-16 bg-[#f8f8f8] shrink-0 overflow-hidden"
+                                                >
                                                     <img
                                                         src={product.image}
                                                         alt={product.name}
-                                                        className="w-full h-full object-contain p-1"
+                                                        className="w-full h-full object-contain p-1 hover:scale-110 transition-transform"
                                                     />
-                                                </div>
+                                                </Link>
 
                                                 {/* Info */}
                                                 <div className="flex-1 min-w-0">
@@ -149,12 +153,14 @@ const SearchModal = ({ open, onClose }) => {
                                                     >
                                                         {product.category}
                                                     </p>
-                                                    <p
-                                                        className="text-sm font-bold text-[#111]
-                                                                  truncate"
+                                                    <Link
+                                                        to={`/product/${product.id}`}
+                                                        onClick={onClose}
+                                                        className="block text-sm font-bold text-[#111]
+                                                                  truncate hover:text-primary transition-colors"
                                                     >
                                                         {product.name}
-                                                    </p>
+                                                    </Link>
                                                     <p className="text-sm font-black text-primary">
                                                         $
                                                         {product.price.toFixed(

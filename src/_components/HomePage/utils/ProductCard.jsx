@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
     return (
@@ -11,7 +12,10 @@ const ProductCard = ({ product }) => {
             className="group cursor-pointer w-full"
         >
             {/* Image Container */}
-            <div className="relative aspect-[1/1.15] bg-[#f2f2f2] mb-4 overflow-hidden">
+            <Link
+                to={`/product/${product.id}`}
+                className="relative block aspect-[1/1.15] bg-[#f2f2f2] mb-4 overflow-hidden"
+            >
                 {product.badge && (
                     <span
                         className={`absolute top-5 left-0 px-4 py-1 text-[11px] font-bold uppercase tracking-widest z-10 ${
@@ -29,7 +33,7 @@ const ProductCard = ({ product }) => {
                     alt={product.name}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-            </div>
+            </Link>
 
             {/* Content Area */}
             <div className="text-left">
@@ -37,9 +41,12 @@ const ProductCard = ({ product }) => {
                 <div className="relative h-6 overflow-hidden mb-1">
                     {/* Product Name (Visible by Default) */}
                     <div className="absolute inset-0 transition-all duration-300 transform group-hover:-translate-y-full group-hover:opacity-0">
-                        <h3 className="text-[15px] font-bold text-[#111] truncate">
+                        <Link
+                            to={`/product/${product.id}`}
+                            className="text-[15px] font-bold text-[#111] truncate hover:text-primary transition-colors"
+                        >
                             {product.name}
-                        </h3>
+                        </Link>
                     </div>
 
                     {/* Add to Cart Button (Visible on Hover) */}
