@@ -30,13 +30,17 @@
     --color-primary-dark: #c0292a;
     --color-primary-light: #fdecea;
 
-    --color-dark: #1c1c1c;
+    --color-dark: #111111;
     --color-dark-soft: #333333;
+    --color-muted: #999999;
+    --color-dim: #bbbbbb;
+    --color-light-muted: #b7b7b7;
 
     --color-sub: #6b6b6b;
     --color-border: #e0e0e0;
+    --color-border-light: #efefef;
     --color-bg-gray: #f5f5f5;
-    --color-bg-light: #fafafa;
+    --color-bg-light: #f8f8f8;
 
     /* Font */
     --font-sans: "Lato", sans-serif;

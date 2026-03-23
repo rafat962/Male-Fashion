@@ -36,7 +36,7 @@ const Navbar = () => {
         <>
             <header className=" w-full top-0 z-50">
                 {/* ── Top Bar ─────────────────────────────── */}
-                <div className="bg-[#111111] py-2.5 hidden md:block">
+                <div className="bg-dark py-2.5 hidden md:block">
                     <div className="container-main flex justify-between items-center text-white/90">
                         <p className="text-[13px] font-normal">
                             Free shipping, 30-day return or refund guarantee.
@@ -68,7 +68,7 @@ const Navbar = () => {
                         {/* Mobile hamburger */}
                         <div className="md:hidden">
                             <IconButton onClick={() => setMobile(true)}>
-                                <MenuIcon sx={{ color: "#111" }} />
+                                <MenuIcon sx={{ color: "var(--color-dark)" }} />
                             </IconButton>
                         </div>
 
@@ -96,8 +96,8 @@ const Navbar = () => {
                                                  border-b-2 transition-all duration-300
                                                  ${
                                                      isActive
-                                                         ? "border-red-600 text-[#111]"
-                                                         : "border-transparent text-[#111] hover:border-red-600"
+                                                         ? "border-primary text-dark"
+                                                         : "border-transparent text-dark hover:border-primary"
                                                  }`
                                             }
                                         >
@@ -116,7 +116,7 @@ const Navbar = () => {
                                 onClick={() => setSearchOpen(true)}
                             >
                                 <SearchOutlinedIcon
-                                    sx={{ fontSize: 22, color: "#111" }}
+                                    sx={{ fontSize: 22, color: "var(--color-dark)" }}
                                 />
                             </IconButton>
 
@@ -131,14 +131,14 @@ const Navbar = () => {
                                             <FavoriteIcon
                                                 sx={{
                                                     fontSize: 22,
-                                                    color: "#e53637",
+                                                    color: "var(--color-primary)",
                                                 }}
                                             />
                                         ) : (
                                             <FavoriteBorderOutlinedIcon
                                                 sx={{
                                                     fontSize: 22,
-                                                    color: "#111",
+                                                    color: "var(--color-dark)",
                                                 }}
                                             />
                                         )}
@@ -157,13 +157,13 @@ const Navbar = () => {
                                             <ShoppingCartOutlinedIcon
                                                 sx={{
                                                     fontSize: 22,
-                                                    color: "#111",
+                                                    color: "var(--color-dark)",
                                                 }}
                                             />
                                         </Badge>
                                     </IconButton>
                                 </NavLink>
-                                <span className="text-[14px] font-bold text-[#111] hidden sm:block">
+                                <span className="text-[14px] font-bold text-dark hidden sm:block">
                                     ${totalPrice.toFixed(2)}
                                 </span>
                             </div>
@@ -198,7 +198,7 @@ const Navbar = () => {
                                     <IconButton
                                         onClick={() => setMobile(false)}
                                     >
-                                        <CloseIcon sx={{ color: "#111" }} />
+                                        <CloseIcon sx={{ color: "var(--color-dark)" }} />
                                     </IconButton>
                                 </div>
                                 <ul className="flex flex-col gap-5">
@@ -213,7 +213,7 @@ const Navbar = () => {
                                                 className={({ isActive }) =>
                                                     `text-lg font-bold uppercase tracking-widest block
                                                      transition-colors duration-200
-                                                     ${isActive ? "text-primary" : "text-[#111] hover:text-primary"}`
+                                                     ${isActive ? "text-primary" : "text-dark hover:text-primary"}`
                                                 }
                                             >
                                                 {label}
@@ -226,7 +226,7 @@ const Navbar = () => {
                                             className={({ isActive }) =>
                                                 `text-lg font-bold uppercase tracking-widest block
                                                  flex items-center gap-2 transition-colors duration-200
-                                                 ${isActive ? "text-primary" : "text-[#111] hover:text-primary"}`
+                                                 ${isActive ? "text-primary" : "text-dark hover:text-primary"}`
                                             }
                                         >
                                             Wishlist

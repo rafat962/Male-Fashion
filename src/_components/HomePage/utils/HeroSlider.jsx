@@ -56,7 +56,7 @@ const HeroSlider = () => {
     };
 
     return (
-        <section className="relative bg-[#f3f2ee] h-screen min-h-[40rem] overflow-hidden">
+        <section className="relative bg-bg-gray h-screen min-h-[40rem] overflow-hidden">
             <AnimatePresence mode="wait">
                 <motion.div
                     key={current}
@@ -123,7 +123,7 @@ const HeroSlider = () => {
                             >
                                 <Link
                                     to="/shop"
-                                    className="btn-primary inline-flex items-center gap-3 px-8 py-4 !bg-[#e53637] hover:!bg-black transition-all text-[0.8rem] font-bold uppercase tracking-widest shadow-lg group"
+                                    className="btn-primary inline-flex items-center gap-3 px-8 py-4 hover:!bg-dark transition-all text-[0.8rem] font-bold uppercase tracking-widest shadow-lg group"
                                 >
                                     Shop Now
                                     <span className="text-[1.2rem] transition-transform group-hover:translate-x-1">

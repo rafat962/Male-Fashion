@@ -30,10 +30,10 @@ const ProductDetails = () => {
             >
                 <Breadcrumb pageName="Product Not Found" />
                 <div className="container-main py-24 flex flex-col items-center text-center">
-                    <h2 className="text-2xl font-black text-[#111] mt-6 mb-2">
+                    <h2 className="text-2xl font-black text-dark mt-6 mb-2">
                         Product Not Found
                     </h2>
-                    <p className="text-sm text-[#999] mb-8">
+                    <p className="text-sm text-muted mb-8">
                         The product you are looking for does not exist.
                     </p>
                     <Link to="/shop" className="btn-primary">
@@ -58,18 +58,8 @@ const ProductDetails = () => {
             <div className="container-main py-12 lg:py-20">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
                     {/* Image Section */}
-                    <motion.div
-                        initial={{ opacity: 0, x: -50 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.6, ease: "easeOut" }}
-                        className="bg-[#f8f8f8] flex items-center justify-center p-8 lg:p-12 overflow-hidden"
-                    >
-                        <motion.img
-                            key={product.id}
-                            initial={{ scale: 0.8, opacity: 0 }}
-                            animate={{ scale: 1, opacity: 1 }}
-                            whileHover={{ scale: 1.05 }}
-                            transition={{ duration: 0.5 }}
+                    <div className="bg-bg-light flex items-center justify-center p-8 lg:p-12">
+                        <img
                             src={product.image}
                             alt={product.name}
                             className="max-w-full max-h-[500px] object-contain drop-shadow-xl"
@@ -90,21 +80,20 @@ const ProductDetails = () => {
                             className="text-xs font-bold uppercase tracking-[2px] text-primary mb-2"
                         >
                             {product.category}
-                        </motion.p>
-
-                        <h1 className="text-3xl lg:text-4xl font-black text-[#111] mb-4">
+                        </p>
+                        <h1 className="text-3xl lg:text-4xl font-black text-dark mb-4">
                             {product.name}
                         </h1>
 
                         {/* Rating */}
-                        <div className="flex items-center gap-2 mb-6 pb-6 border-b border-[#eee]">
+                        <div className="flex items-center gap-2 mb-6 pb-6 border-b border-border-light">
                             <Rating
                                 value={product.rating.stars}
                                 readOnly
                                 size="small"
-                                sx={{ color: "#e53637" }}
+                                sx={{ color: "var(--color-primary)" }}
                             />
-                            <span className="text-xs text-[#999]">
+                            <span className="text-xs text-muted">
                                 ({product.rating.count} reviews)
                             </span>
                         </div>
@@ -120,7 +109,7 @@ const ProductDetails = () => {
                                 ${product.price.toFixed(2)}
                             </span>
                             {product.oldPrice && (
-                                <span className="text-lg text-[#bbb] line-through font-medium">
+                                <span className="text-lg text-dim line-through font-medium">
                                     ${product.oldPrice.toFixed(2)}
                                 </span>
                             )}
@@ -134,10 +123,10 @@ const ProductDetails = () => {
                         {/* Actions */}
                         <div className="flex flex-wrap items-center gap-4 mt-auto">
                             {/* Quantity Selector */}
-                            <div className="flex items-center border border-[#e8e8e8] h-12">
+                            <div className="flex items-center border border-border h-12">
                                 <button
                                     onClick={() => handleQty(qty - 1)}
-                                    className="w-12 flex items-center justify-center text-[#111] hover:text-primary transition-colors cursor-pointer text-xl font-bold"
+                                    className="w-12 flex items-center justify-center text-dark hover:text-primary transition-colors cursor-pointer text-xl font-bold"
                                 >
                                     −
                                 </button>
@@ -146,11 +135,11 @@ const ProductDetails = () => {
                                     min={1}
                                     value={qty}
                                     onChange={(e) => handleQty(e.target.value)}
-                                    className="w-12 text-center text-sm font-bold text-[#111] border-x border-[#e8e8e8] outline-none bg-transparent"
+                                    className="w-12 text-center text-sm font-bold text-dark border-x border-border outline-none bg-transparent"
                                 />
                                 <button
                                     onClick={() => handleQty(qty + 1)}
-                                    className="w-12 flex items-center justify-center text-[#111] hover:text-primary transition-colors cursor-pointer text-xl font-bold"
+                                    className="w-12 flex items-center justify-center text-dark hover:text-primary transition-colors cursor-pointer text-xl font-bold"
                                 >
                                     +
                                 </button>
@@ -171,58 +160,27 @@ const ProductDetails = () => {
                             <motion.button
                                 whileTap={{ scale: 0.8 }}
                                 onClick={() => toggleWishlist(product)}
-                                className="w-12 h-12 border border-[#e8e8e8] flex items-center justify-center hover:border-primary hover:text-primary transition-all cursor-pointer"
+                                className="w-12 h-12 border border-border flex items-center justify-center hover:border-primary hover:text-primary transition-all cursor-pointer"
                             >
-                                <AnimatePresence mode="wait">
-                                    <motion.div
-                                        key={wished ? "active" : "inactive"}
-                                        initial={{ scale: 0.5, opacity: 0 }}
-                                        animate={{ scale: 1, opacity: 1 }}
-                                        exit={{ scale: 0.5, opacity: 0 }}
-                                        transition={{ duration: 0.2 }}
-                                    >
-                                        {wished ? (
-                                            <FavoriteIcon
-                                                sx={{
-                                                    fontSize: 20,
-                                                    color: "#e53637",
-                                                }}
-                                            />
-                                        ) : (
-                                            <FavoriteBorderIcon
-                                                sx={{ fontSize: 20 }}
-                                            />
-                                        )}
-                                    </motion.div>
-                                </AnimatePresence>
-                            </motion.button>
+                                {wished ? (
+                                    <FavoriteIcon sx={{ fontSize: 20, color: "#e53637" }} />
+                                ) : (
+                                    <FavoriteBorderIcon sx={{ fontSize: 20 }} />
+                                )}
+                            </button>
                         </div>
 
                         {/* Additional Info */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            className="mt-10 pt-10 border-t border-[#eee]"
-                        >
+                        <div className="mt-10 pt-10 border-t border-border-light">
                             <ul className="flex flex-col gap-2">
-                                <li className="text-xs uppercase tracking-[1px] text-[#111] font-bold">
-                                    SKU:{" "}
-                                    <span className="text-[#999] font-normal">
-                                        BE-0012{product.id}
-                                    </span>
+                                <li className="text-xs uppercase tracking-[1px] text-dark font-bold">
+                                    SKU: <span className="text-muted font-normal">BE-0012{product.id}</span>
                                 </li>
-                                <li className="text-xs uppercase tracking-[1px] text-[#111] font-bold">
-                                    Categories:{" "}
-                                    <span className="text-[#999] font-normal">
-                                        {product.category}
-                                    </span>
+                                <li className="text-xs uppercase tracking-[1px] text-dark font-bold">
+                                    Categories: <span className="text-muted font-normal">{product.category}</span>
                                 </li>
-                                <li className="text-xs uppercase tracking-[1px] text-[#111] font-bold">
-                                    Tags:{" "}
-                                    <span className="text-[#999] font-normal">
-                                        {product.tabs?.join(", ")}
-                                    </span>
+                                <li className="text-xs uppercase tracking-[1px] text-dark font-bold">
+                                    Tags: <span className="text-muted font-normal">{product.tabs?.join(", ")}</span>
                                 </li>
                             </ul>
                         </motion.div>

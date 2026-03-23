@@ -98,7 +98,7 @@ const ShopPage = () => {
                                     borderRadius: 0,
                                     minWidth: 180,
                                     "& .MuiOutlinedInput-notchedOutline": {
-                                        borderColor: "#e0e0e0",
+                                        borderColor: "var(--color-border)",
                                     },
                                 }}
                             >
