@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Badge, IconButton, Menu, MenuItem } from "@mui/material";
 import { motion, AnimatePresence } from "framer-motion";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
@@ -17,6 +17,7 @@ import { supabase } from "../../../supabaseClient";
 import { useEffect } from "react";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
+import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 
 const NavLinks = [
     { label: "Home", to: "/" },
@@ -28,6 +29,7 @@ const NavLinks = [
 const Navbar = () => {
     const { totalItems, totalPrice } = useCart();
     const { totalWishlist } = useWishlist();
+    const navigate = useNavigate();
     const [isMobileMenuOpen, setMobile] = useState(false);
     const [searchOpen, setSearchOpen] = useState(false);
     const [user, setUser] = useState(null);
@@ -207,6 +209,21 @@ const Navbar = () => {
                                     {user?.email}
                                 </MenuItem>
                                 <MenuItem
+                                    onClick={() => {
+                                        handleMenuClose();
+                                        navigate("/profile");
+                                    }}
+                                    sx={{
+                                        fontSize: "12px",
+                                        fontWeight: 700,
+                                        textTransform: "uppercase",
+                                        letterSpacing: "1px",
+                                        gap: 1,
+                                    }}
+                                >
+                                    <PersonOutlineIcon sx={{ fontSize: 16 }} /> My Profile
+                                </MenuItem>
+                                <MenuItem
                                     onClick={handleLogout}
                                     sx={{
                                         fontSize: "12px",
@@ -330,7 +347,16 @@ const Navbar = () => {
                                             </NavLink>
                                         </li>
                                     ))}
-                                    {!user && (
+                                    {user ? (
+                                        <li onClick={() => setMobile(false)}>
+                                            <NavLink
+                                                to="/profile"
+                                                className="text-lg font-bold uppercase tracking-widest block text-dark hover:text-primary"
+                                            >
+                                                My Profile
+                                            </NavLink>
+                                        </li>
+                                    ) : (
                                         <>
                                             <li onClick={() => setMobile(false)}>
                                                 <NavLink
