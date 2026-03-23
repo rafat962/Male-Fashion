@@ -1,26 +1,11 @@
 /* eslint-disable react-refresh/only-export-components */
-import {
-    createContext,
-    useContext,
-    useState,
-    useCallback,
-    useEffect,
-} from "react";
-import toast from "react-hot-toast";
+import { createContext, useContext, useState, useCallback } from "react";
+import toast from "react-hot-toast"; // Import toast
 
 const CartContext = createContext(null);
 
 export const CartProvider = ({ children }) => {
-    // Initialize state from localStorage
-    const [cartItems, setCartItems] = useState(() => {
-        const savedCart = localStorage.getItem("cart");
-        return savedCart ? JSON.parse(savedCart) : [];
-    });
-
-    // Sync cartItems to localStorage on every change
-    useEffect(() => {
-        localStorage.setItem("cart", JSON.stringify(cartItems));
-    }, [cartItems]);
+    const [cartItems, setCartItems] = useState([]);
 
     const addToCart = useCallback((product, quantity = 1) => {
         setCartItems((prev) => {
@@ -35,6 +20,7 @@ export const CartProvider = ({ children }) => {
             return [...prev, { ...product, quantity }];
         });
 
+        // Trigger success toast
         toast.success(
             <div className="flex flex-col">
                 <span className="font-bold">Added to cart!</span>
@@ -48,14 +34,14 @@ export const CartProvider = ({ children }) => {
             {
                 duration: 3000,
                 style: {
-                    border: "1px solid #e2e8f0",
+                    border: "1px solid #e2e8f0", // Light border
                     padding: "12px 16px",
                     color: "#1a202c",
-                    borderRadius: "4px",
+                    borderRadius: "4px", // Slightly rounded for a modern look
                     background: "#ffffff",
                 },
                 iconTheme: {
-                    primary: "#10b981",
+                    primary: "#10b981", // Emerald Green color for the checkmark
                     secondary: "#ffffff",
                 },
             },
@@ -84,7 +70,6 @@ export const CartProvider = ({ children }) => {
 
     const clearCart = useCallback(() => {
         setCartItems([]);
-        localStorage.removeItem("cart");
         toast("Cart cleared", { icon: "🗑️" });
     }, []);
 

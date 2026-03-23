@@ -1,25 +1,10 @@
 /* eslint-disable react-refresh/only-export-components */
-import {
-    createContext,
-    useContext,
-    useState,
-    useCallback,
-    useEffect,
-} from "react";
+import { createContext, useContext, useState, useCallback } from "react";
 
 const WishlistContext = createContext(null);
 
 export const WishlistProvider = ({ children }) => {
-    // Initialize wishlist from localStorage
-    const [wishlistItems, setWishlistItems] = useState(() => {
-        const savedWishlist = localStorage.getItem("wishlist");
-        return savedWishlist ? JSON.parse(savedWishlist) : [];
-    });
-
-    // Persist wishlist to localStorage on every change
-    useEffect(() => {
-        localStorage.setItem("wishlist", JSON.stringify(wishlistItems));
-    }, [wishlistItems]);
+    const [wishlistItems, setWishlistItems] = useState([]);
 
     const addToWishlist = useCallback((product) => {
         setWishlistItems((prev) => {

@@ -15,6 +15,7 @@ import SearchModal from "../Searchmodal";
 import { useWishlist } from "../../../context/WishlistContext";
 import { supabase } from "../../../supabaseClient";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
 
@@ -26,6 +27,7 @@ const NavLinks = [
 ];
 
 const Navbar = () => {
+    const navigate = useNavigate();
     const { totalItems, totalPrice } = useCart();
     const { totalWishlist } = useWishlist();
     const [isMobileMenuOpen, setMobile] = useState(false);
@@ -128,7 +130,7 @@ const Navbar = () => {
                         <div className="md:w-1/4">
                             <NavLink to="/">
                                 <img
-                                    src="/logo.png"
+                                    src="logo.png"
                                     alt="Logo"
                                     className="h-5 md:h-6"
                                 />
@@ -205,6 +207,21 @@ const Navbar = () => {
                             >
                                 <MenuItem disabled sx={{ fontSize: "12px", fontWeight: 700 }}>
                                     {user?.email}
+                                </MenuItem>
+                                <MenuItem
+                                    onClick={() => {
+                                        handleMenuClose();
+                                        navigate("/profile");
+                                    }}
+                                    sx={{
+                                        fontSize: "12px",
+                                        fontWeight: 700,
+                                        textTransform: "uppercase",
+                                        letterSpacing: "1px",
+                                        gap: 1,
+                                    }}
+                                >
+                                    <AccountCircleOutlinedIcon sx={{ fontSize: 16 }} /> My Profile
                                 </MenuItem>
                                 <MenuItem
                                     onClick={handleLogout}

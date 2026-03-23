@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
@@ -37,7 +37,6 @@ const QtySelector = ({ value, onChange }) => (
 
 /* ── Main Cart Page ────────────────────────────────────── */
 const CartPage = () => {
-    const navigate = useNavigate();
     const { cartItems, updateQuantity, removeFromCart, totalPrice, clearCart } =
         useCart();
     const [coupon, setCoupon] = useState("");
@@ -293,7 +292,9 @@ const CartPage = () => {
 
                             <div className="flex flex-col gap-3">
                                 <div className="flex justify-between text-sm">
-                                    <span className="text-sub">Subtotal</span>
+                                    <span className="text-sub">
+                                        Subtotal
+                                    </span>
                                     <span className="font-bold text-dark">
                                         ${subtotal.toFixed(2)}
                                     </span>
@@ -311,7 +312,9 @@ const CartPage = () => {
                                 )}
 
                                 <div className="flex justify-between text-sm">
-                                    <span className="text-sub">Shipping</span>
+                                    <span className="text-sub">
+                                        Shipping
+                                    </span>
                                     <span className="font-bold text-dark">
                                         {shipping === 0 ? (
                                             <span className="text-green-600">
@@ -342,10 +345,7 @@ const CartPage = () => {
                                 </div>
                             </div>
 
-                            <button
-                                onClick={() => navigate("/checkout")}
-                                className="btn-primary w-full mt-5 text-center"
-                            >
+                            <button className="btn-primary w-full mt-5 text-center">
                                 Proceed to Checkout
                             </button>
                         </div>
