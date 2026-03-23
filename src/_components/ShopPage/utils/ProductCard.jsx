@@ -60,7 +60,7 @@ const ProductCard = ({ product }) => {
                         <FavoriteIcon
                             sx={{
                                 fontSize: { xs: 14, sm: 16 },
-                                color: "#e53637",
+                                color: "var(--color-primary)",
                             }}
                         />
                     ) : (
@@ -90,7 +90,7 @@ const ProductCard = ({ product }) => {
                         value={product.rating.stars}
                         readOnly
                         size="small"
-                        sx={{ fontSize: { xs: 11, sm: 13 }, color: "#e53637" }}
+                        sx={{ fontSize: { xs: 11, sm: 13 }, color: "var(--color-primary)" }}
                     />
                     <span className="text-[9px] sm:text-[0.65rem] text-sub">
                         ({product.rating.count})

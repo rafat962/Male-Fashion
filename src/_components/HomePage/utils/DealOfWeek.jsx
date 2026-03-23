@@ -52,7 +52,7 @@ const DealSection = () => {
     }, []);
 
     return (
-        <section className="bg-[#f3f2ee] py-20 overflow-hidden">
+        <section className="bg-bg-gray py-20 overflow-hidden">
             <div className="container-main flex flex-col lg:flex-row items-center justify-between gap-12">
                 {/* Left Side: Tabs Selection */}
                 <div className="w-full lg:w-1/4 flex flex-col gap-6 order-2 lg:order-1">
@@ -62,8 +62,8 @@ const DealSection = () => {
                             onClick={() => setActiveTab(cat)}
                             className={`text-left text-2xl lg:text-3xl font-bold transition-all duration-300 ${
                                 activeTab === cat
-                                    ? "text-black"
-                                    : "text-gray-400 hover:text-gray-600"
+                                    ? "text-dark"
+                                    : "text-dim hover:text-sub"
                             }`}
                         >
                             {cat}
@@ -88,7 +88,7 @@ const DealSection = () => {
                                 className="max-w-full h-auto"
                             />
 
-                            <div className="absolute -top-4 -right-4 bg-[#111] text-white w-20 h-20 rounded-full flex flex-col items-center justify-center shadow-xl">
+                            <div className="absolute -top-4 -right-4 bg-dark text-white w-20 h-20 rounded-full flex flex-col items-center justify-center shadow-xl">
                                 <span className="text-[11px] opacity-80">
                                     Sale Of
                                 </span>
@@ -102,10 +102,10 @@ const DealSection = () => {
 
                 {/* Right Side: Deal Info & Timer */}
                 <div className="w-full lg:w-1/4 flex flex-col items-start order-3">
-                    <span className="text-red-600 font-bold uppercase tracking-widest text-xs mb-4">
+                    <span className="text-primary font-bold uppercase tracking-widest text-xs mb-4">
                         Deal Of The Week
                     </span>
-                    <h2 className="text-3xl font-bold text-[#111] mb-8 leading-tight">
+                    <h2 className="text-3xl font-bold text-dark mb-8 leading-tight">
                         Multi-pocket Chest Bag Black
                     </h2>
 
@@ -116,17 +116,17 @@ const DealSection = () => {
                                 key={label}
                                 className="flex flex-col items-center"
                             >
-                                <span className="text-3xl font-bold text-[#111]">
+                                <span className="text-3xl font-bold text-dark">
                                     {value.toString().padStart(2, "0")}
                                 </span>
-                                <span className="text-xs text-gray-500 capitalize">
+                                <span className="text-xs text-sub capitalize">
                                     {label}
                                 </span>
                             </div>
                         ))}
                     </div>
 
-                    <button className="bg-black text-white px-8 py-3 text-xs font-bold uppercase tracking-[2px] hover:bg-red-600 transition-all">
+                    <button className="bg-dark text-white px-8 py-3 text-xs font-bold uppercase tracking-[2px] hover:bg-primary transition-all cursor-pointer">
                         Shop Now
                     </button>
                 </div>

@@ -62,10 +62,10 @@ const ContactPage = () => {
                     className="text-center mb-14"
                 >
                     <p className="section-subtitle">Get In Touch</p>
-                    <h2 className="text-3xl lg:text-4xl font-black text-[#111] tracking-tight">
+                    <h2 className="text-3xl lg:text-4xl font-black text-dark tracking-tight">
                         We'd love to hear from you
                     </h2>
-                    <p className="text-sm text-[#999] mt-3 max-w-md mx-auto leading-relaxed">
+                    <p className="text-sm text-muted mt-3 max-w-md mx-auto leading-relaxed">
                         Have a question about an order, sizing, or just want to
                         say hello? Our team is here to help.
                     </p>
@@ -129,21 +129,21 @@ const ContactPage = () => {
                                     initial={{ scale: 0.8, opacity: 0 }}
                                     animate={{ scale: 1, opacity: 1 }}
                                     exit={{ scale: 0.8, opacity: 0 }}
-                                    className="h-full flex flex-col items-center justify-center text-center py-16 border border-[#efefef]"
+                                    className="h-full flex flex-col items-center justify-center text-center py-16 border border-border-dim"
                                 >
                                     <motion.div
                                         initial={{ rotate: -45, scale: 0 }}
                                         animate={{ rotate: 0, scale: 1 }}
-                                        className="w-14 h-14 bg-[#111] flex items-center justify-center mb-5"
+                                        className="w-14 h-14 bg-dark flex items-center justify-center mb-5"
                                     >
                                         <span className="text-white text-2xl">
                                             ✓
                                         </span>
                                     </motion.div>
-                                    <h3 className="text-lg font-black text-[#111] mb-2">
+                                    <h3 className="text-lg font-black text-dark mb-2">
                                         Message Sent!
                                     </h3>
-                                    <p className="text-sm text-[#999] mb-6">
+                                    <p className="text-sm text-muted mb-6">
                                         Thanks for reaching out. We'll get back
                                         to you within 24 hours.
                                     </p>
@@ -232,7 +232,7 @@ const ContactPage = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.8 }}
-                    className="mt-16 w-full h-64 bg-[#f5f5f5] border border-[#e0e0e0] flex items-center justify-center overflow-hidden"
+                    className="mt-16 w-full h-64 bg-dim border border-border-light flex items-center justify-center overflow-hidden"
                 >
                     <iframe
                         title="map"

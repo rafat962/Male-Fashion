@@ -40,15 +40,15 @@ const InstagramSection = () => {
 
                 {/* Right Side: Content */}
                 <div className="w-full lg:w-[35%] flex flex-col items-start px-4">
-                    <h2 className="text-4xl lg:text-5xl font-black text-[#111] mb-6">
+                    <h2 className="text-4xl lg:text-5xl font-black text-dark mb-6">
                         Instagram
                     </h2>
-                    <p className="text-gray-500 text-base leading-relaxed mb-10 max-w-sm">
+                    <p className="text-sub text-base leading-relaxed mb-10 max-w-sm">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                         sed do eiusmod tempor incididunt ut labore et dolore
                         magna aliqua.
                     </p>
-                    <span className="text-red-600 font-bold text-2xl tracking-tight">
+                    <span className="text-primary font-bold text-2xl tracking-tight">
                         #Male_Fashion
                     </span>
                 </div>

@@ -13,7 +13,7 @@ const POSTS_PER_PAGE = 6;
 /* ── Single Blog Card ──────────────────────────────────── */
 const BlogCard = ({ post, featured = false }) => (
     <article
-        className={`group bg-white border border-[#efefef] hover:border-[#ddd]
+        className={`group bg-white border border-border-dim hover:border-light-muted
                          hover:shadow-[0_8px_30px_rgba(0,0,0,0.07)]
                          transition-all duration-300 overflow-hidden
                          ${featured ? "lg:col-span-2" : ""}`}
@@ -42,7 +42,7 @@ const BlogCard = ({ post, featured = false }) => (
 
             {/* Title */}
             <h3
-                className={`font-black text-[#111] leading-snug mb-3
+                className={`font-black text-dark leading-snug mb-3
                             group-hover:text-primary transition-colors duration-200
                             ${featured ? "text-xl lg:text-2xl" : "text-base"}`}
             >
@@ -50,14 +50,14 @@ const BlogCard = ({ post, featured = false }) => (
             </h3>
 
             {/* Excerpt */}
-            <p className="text-sm text-[#888] leading-relaxed mb-4 line-clamp-2">
+            <p className="text-sm text-muted leading-relaxed mb-4 line-clamp-2">
                 {post.excerpt}
             </p>
 
             {/* Meta */}
             <div
                 className="flex items-center gap-4 text-[10px] font-bold uppercase
-                            tracking-[1.5px] text-[#bbb] mb-5"
+                            tracking-[1.5px] text-text-dim mb-5"
             >
                 <span className="flex items-center gap-1">
                     <PersonOutlineOutlinedIcon sx={{ fontSize: 13 }} />
@@ -77,7 +77,7 @@ const BlogCard = ({ post, featured = false }) => (
             <Link
                 to={`/blog/${post.id}`}
                 className="inline-flex items-center gap-1 text-[11px] font-bold uppercase
-                           tracking-[2px] text-[#111] border-b border-[#111] pb-0.5
+                           tracking-[2px] text-dark border-b border-dark pb-0.5
                            hover:text-primary hover:border-primary transition-colors duration-200"
             >
                 Read More
@@ -112,7 +112,7 @@ const BlogPage = () => {
                 {/* ── Header ────────────────────────────── */}
                 <div className="text-center mb-10">
                     <p className="section-subtitle">Our Journal</p>
-                    <h1 className="text-3xl lg:text-4xl font-black text-[#111] tracking-tight">
+                    <h1 className="text-3xl lg:text-4xl font-black text-dark tracking-tight">
                         Fashion New Trends
                     </h1>
                 </div>
@@ -130,8 +130,8 @@ const BlogPage = () => {
                                         border transition-all duration-200
                                         ${
                                             activeCategory === cat
-                                                ? "bg-[#111] text-white border-[#111]"
-                                                : "border-[#e0e0e0] text-[#999] hover:border-[#111] hover:text-[#111]"
+                                                ? "bg-dark text-white border-dark"
+                                                : "border-border-light text-muted hover:border-dark hover:text-dark"
                                         }`}
                         >
                             {cat}
@@ -173,8 +173,8 @@ const BlogPage = () => {
                                 className={`w-9 h-9 text-sm font-bold border transition-all duration-200
                                             ${
                                                 page === p
-                                                    ? "bg-[#111] text-white border-[#111]"
-                                                    : "border-[#e0e0e0] text-[#999] hover:border-[#111] hover:text-[#111]"
+                                                    ? "bg-dark text-white border-dark"
+                                                    : "border-border-light text-muted hover:border-dark hover:text-dark"
                                             }`}
                             >
                                 {p}
