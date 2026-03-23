@@ -29,15 +29,15 @@ const ProductSection = () => {
                             onClick={() => setActiveTab(tab.id)}
                             className={`relative text-lg md:text-2xl font-bold tracking-tight transition-all cursor-pointer duration-300 ${
                                 activeTab === tab.id
-                                    ? "text-[#111]"
-                                    : "text-[#b7b7b7] hover:text-[#111]"
+                                    ? "text-dark"
+                                    : "text-light-muted hover:text-dark"
                             }`}
                         >
                             {tab.label}
                             {activeTab === tab.id && (
                                 <motion.div
                                     layoutId="activeTabUnderline"
-                                    className="absolute -bottom-1 left-0 right-0 h-[2px] bg-red-600 w-full mx-auto"
+                                    className="absolute -bottom-1 left-0 right-0 h-[2px] bg-primary w-full mx-auto"
                                     transition={{
                                         type: "spring",
                                         stiffness: 380,
