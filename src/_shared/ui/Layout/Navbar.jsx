@@ -48,12 +48,12 @@ const Navbar = () => {
                             >
                                 Sign In
                             </a>
-                            <a
-                                href="#"
+                            <NavLink
+                                to="/faqs"
                                 className="hover:text-primary transition-colors"
                             >
                                 FAQs
-                            </a>
+                            </NavLink>
                             <button className="flex items-center gap-1 hover:text-primary transition-colors">
                                 USD{" "}
                                 <KeyboardArrowDownIcon sx={{ fontSize: 16 }} />
