@@ -8,6 +8,7 @@ import BlogPage from "../_components/Blog/Blog";
 import WishlistPage from "../_components/Wishlistpage/Wishlistpage";
 import ProductDetails from "../_components/ProductDetails/ProductDetails";
 import FAQs from "../_components/FAQs/FAQs";
+import CheckoutPage from "../_components/CartPage/CheckoutPage/Checkoutpage";
 
 const AppRouter = () => {
     return (
@@ -19,6 +20,7 @@ const AppRouter = () => {
                     <Route path="faqs" element={<FAQs />} />
                     <Route path="product/:id" element={<ProductDetails />} />
                     <Route path="cart" element={<CartPage />} />
+                    <Route path="checkout" element={<CheckoutPage />} />
                     <Route path="contact" element={<ContactPage />} />
                     <Route path="blog" element={<BlogPage />} />
                     <Route path="wishlist" element={<WishlistPage />} />

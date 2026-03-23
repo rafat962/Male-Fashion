@@ -1,8 +1,11 @@
 /* eslint-disable no-unused-vars */
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { useCart } from "../../../context/CartContext";
 
 const ProductCard = ({ product }) => {
+    const { addToCart } = useCart();
+
     return (
         <motion.div
             layout
@@ -51,7 +54,10 @@ const ProductCard = ({ product }) => {
 
                     {/* Add to Cart Button (Visible on Hover) */}
                     <div className="absolute inset-0 transition-all duration-300 transform translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100">
-                        <button className="text-red-600 font-bold text-[15px] uppercase tracking-normal transition-all cursor-pointer">
+                        <button
+                            onClick={() => addToCart(product, 1)}
+                            className="text-red-600 font-bold text-[15px] uppercase tracking-normal transition-all cursor-pointer"
+                        >
                             + Add To Cart
                         </button>
                     </div>

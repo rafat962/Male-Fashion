@@ -57,8 +57,12 @@ const ProductDetails = () => {
 
             <div className="container-main py-12 lg:py-20">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
-                    {/* Image Section */}
-                    <div className="bg-bg-light flex items-center justify-center p-8 lg:p-12">
+                    {/* Image Section - Fixed Tag */}
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        className="bg-bg-light flex items-center justify-center p-8 lg:p-12"
+                    >
                         <img
                             src={product.image}
                             alt={product.name}
@@ -80,7 +84,7 @@ const ProductDetails = () => {
                             className="text-xs font-bold uppercase tracking-[2px] text-primary mb-2"
                         >
                             {product.category}
-                        </p>
+                        </motion.p>
                         <h1 className="text-3xl lg:text-4xl font-black text-dark mb-4">
                             {product.name}
                         </h1>
@@ -162,25 +166,55 @@ const ProductDetails = () => {
                                 onClick={() => toggleWishlist(product)}
                                 className="w-12 h-12 border border-border flex items-center justify-center hover:border-primary hover:text-primary transition-all cursor-pointer"
                             >
-                                {wished ? (
-                                    <FavoriteIcon sx={{ fontSize: 20, color: "#e53637" }} />
-                                ) : (
-                                    <FavoriteBorderIcon sx={{ fontSize: 20 }} />
-                                )}
-                            </button>
+                                <AnimatePresence mode="wait">
+                                    <motion.div
+                                        key={wished ? "active" : "inactive"}
+                                        initial={{ scale: 0, opacity: 0 }}
+                                        animate={{ scale: 1, opacity: 1 }}
+                                        exit={{ scale: 0, opacity: 0 }}
+                                    >
+                                        {wished ? (
+                                            <FavoriteIcon
+                                                sx={{
+                                                    fontSize: 20,
+                                                    color: "#e53637",
+                                                }}
+                                            />
+                                        ) : (
+                                            <FavoriteBorderIcon
+                                                sx={{ fontSize: 20 }}
+                                            />
+                                        )}
+                                    </motion.div>
+                                </AnimatePresence>
+                            </motion.button>
                         </div>
 
-                        {/* Additional Info */}
-                        <div className="mt-10 pt-10 border-t border-border-light">
+                        {/* Additional Info - Fixed Tag */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 10 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="mt-10 pt-10 border-t border-border-light"
+                        >
                             <ul className="flex flex-col gap-2">
                                 <li className="text-xs uppercase tracking-[1px] text-dark font-bold">
-                                    SKU: <span className="text-muted font-normal">BE-0012{product.id}</span>
+                                    SKU:{" "}
+                                    <span className="text-muted font-normal">
+                                        BE-0012{product.id}
+                                    </span>
                                 </li>
                                 <li className="text-xs uppercase tracking-[1px] text-dark font-bold">
-                                    Categories: <span className="text-muted font-normal">{product.category}</span>
+                                    Categories:{" "}
+                                    <span className="text-muted font-normal">
+                                        {product.category}
+                                    </span>
                                 </li>
                                 <li className="text-xs uppercase tracking-[1px] text-dark font-bold">
-                                    Tags: <span className="text-muted font-normal">{product.tabs?.join(", ")}</span>
+                                    Tags:{" "}
+                                    <span className="text-muted font-normal">
+                                        {product.tabs?.join(", ")}
+                                    </span>
                                 </li>
                             </ul>
                         </motion.div>
