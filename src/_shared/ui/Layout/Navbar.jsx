@@ -128,7 +128,7 @@ const Navbar = () => {
                         <div className="md:w-1/4">
                             <NavLink to="/">
                                 <img
-                                    src="logo.png"
+                                    src="/logo.png"
                                     alt="Logo"
                                     className="h-5 md:h-6"
                                 />

@@ -1,5 +1,7 @@
+/* eslint-disable no-unused-vars */
 import { useState, useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import { Rating } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -21,7 +23,11 @@ const ProductDetails = () => {
 
     if (!product) {
         return (
-            <div className="bg-white min-h-screen">
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="bg-white min-h-screen"
+            >
                 <Breadcrumb pageName="Product Not Found" />
                 <div className="container-main py-24 flex flex-col items-center text-center">
                     <h2 className="text-2xl font-black text-dark mt-6 mb-2">
@@ -34,7 +40,7 @@ const ProductDetails = () => {
                         Back to Shop
                     </Link>
                 </div>
-            </div>
+            </motion.div>
         );
     }
 
@@ -51,20 +57,34 @@ const ProductDetails = () => {
 
             <div className="container-main py-12 lg:py-20">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
-                    {/* Image Section */}
-                    <div className="bg-bg-light flex items-center justify-center p-8 lg:p-12">
+                    {/* Image Section - Fixed Tag */}
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        className="bg-bg-light flex items-center justify-center p-8 lg:p-12"
+                    >
                         <img
                             src={product.image}
                             alt={product.name}
-                            className="max-w-full max-h-[500px] object-contain"
+                            className="max-w-full max-h-[500px] object-contain drop-shadow-xl"
                         />
-                    </div>
+                    </motion.div>
 
                     {/* Info Section */}
-                    <div className="flex flex-col">
-                        <p className="text-xs font-bold uppercase tracking-[2px] text-primary mb-2">
+                    <motion.div
+                        initial={{ opacity: 0, x: 50 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.6, delay: 0.2 }}
+                        className="flex flex-col"
+                    >
+                        <motion.p
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 0.4 }}
+                            className="text-xs font-bold uppercase tracking-[2px] text-primary mb-2"
+                        >
                             {product.category}
-                        </p>
+                        </motion.p>
                         <h1 className="text-3xl lg:text-4xl font-black text-dark mb-4">
                             {product.name}
                         </h1>
@@ -83,7 +103,12 @@ const ProductDetails = () => {
                         </div>
 
                         {/* Price */}
-                        <div className="flex items-center gap-4 mb-6">
+                        <motion.div
+                            initial={{ scale: 0.9, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            transition={{ delay: 0.5 }}
+                            className="flex items-center gap-4 mb-6"
+                        >
                             <span className="text-2xl font-black text-primary">
                                 ${product.price.toFixed(2)}
                             </span>
@@ -92,10 +117,11 @@ const ProductDetails = () => {
                                     ${product.oldPrice.toFixed(2)}
                                 </span>
                             )}
-                        </div>
+                        </motion.div>
 
                         <p className="text-[#666] leading-relaxed mb-8">
-                            {product.description || "No description available for this product."}
+                            {product.description ||
+                                "No description available for this product."}
                         </p>
 
                         {/* Actions */}
@@ -124,42 +150,75 @@ const ProductDetails = () => {
                             </div>
 
                             {/* Add to Cart */}
-                            <button
+                            <motion.button
+                                whileHover={{ scale: 1.02 }}
+                                whileTap={{ scale: 0.98 }}
                                 onClick={() => addToCart(product, qty)}
                                 className="flex-1 min-w-[200px] h-12 bg-dark text-white text-xs font-bold uppercase tracking-[2px] flex items-center justify-center gap-2 hover:bg-primary transition-colors cursor-pointer"
                             >
                                 <AddShoppingCartIcon sx={{ fontSize: 18 }} />
                                 Add to Cart
-                            </button>
+                            </motion.button>
 
                             {/* Wishlist */}
-                            <button
+                            <motion.button
+                                whileTap={{ scale: 0.8 }}
                                 onClick={() => toggleWishlist(product)}
                                 className="w-12 h-12 border border-border flex items-center justify-center hover:border-primary hover:text-primary transition-all cursor-pointer"
                             >
-                                {wished ? (
-                                    <FavoriteIcon sx={{ fontSize: 20, color: "#e53637" }} />
-                                ) : (
-                                    <FavoriteBorderIcon sx={{ fontSize: 20 }} />
-                                )}
-                            </button>
+                                <AnimatePresence mode="wait">
+                                    <motion.div
+                                        key={wished ? "active" : "inactive"}
+                                        initial={{ scale: 0, opacity: 0 }}
+                                        animate={{ scale: 1, opacity: 1 }}
+                                        exit={{ scale: 0, opacity: 0 }}
+                                    >
+                                        {wished ? (
+                                            <FavoriteIcon
+                                                sx={{
+                                                    fontSize: 20,
+                                                    color: "#e53637",
+                                                }}
+                                            />
+                                        ) : (
+                                            <FavoriteBorderIcon
+                                                sx={{ fontSize: 20 }}
+                                            />
+                                        )}
+                                    </motion.div>
+                                </AnimatePresence>
+                            </motion.button>
                         </div>
 
-                        {/* Additional Info */}
-                        <div className="mt-10 pt-10 border-t border-border-light">
+                        {/* Additional Info - Fixed Tag */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 10 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="mt-10 pt-10 border-t border-border-light"
+                        >
                             <ul className="flex flex-col gap-2">
                                 <li className="text-xs uppercase tracking-[1px] text-dark font-bold">
-                                    SKU: <span className="text-muted font-normal">BE-0012{product.id}</span>
+                                    SKU:{" "}
+                                    <span className="text-muted font-normal">
+                                        BE-0012{product.id}
+                                    </span>
                                 </li>
                                 <li className="text-xs uppercase tracking-[1px] text-dark font-bold">
-                                    Categories: <span className="text-muted font-normal">{product.category}</span>
+                                    Categories:{" "}
+                                    <span className="text-muted font-normal">
+                                        {product.category}
+                                    </span>
                                 </li>
                                 <li className="text-xs uppercase tracking-[1px] text-dark font-bold">
-                                    Tags: <span className="text-muted font-normal">{product.tabs?.join(", ")}</span>
+                                    Tags:{" "}
+                                    <span className="text-muted font-normal">
+                                        {product.tabs?.join(", ")}
+                                    </span>
                                 </li>
                             </ul>
-                        </div>
-                    </div>
+                        </motion.div>
+                    </motion.div>
                 </div>
             </div>
         </div>
