@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { Badge, IconButton } from "@mui/material";
+import { Badge, IconButton, Menu, MenuItem } from "@mui/material";
 import { motion, AnimatePresence } from "framer-motion";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
@@ -13,6 +13,10 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useCart } from "../../../context/CartContext";
 import SearchModal from "../Searchmodal";
 import { useWishlist } from "../../../context/WishlistContext";
+import { supabase } from "../../../supabaseClient";
+import { useEffect } from "react";
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 const NavLinks = [
     { label: "Home", to: "/" },
@@ -26,6 +30,32 @@ const Navbar = () => {
     const { totalWishlist } = useWishlist();
     const [isMobileMenuOpen, setMobile] = useState(false);
     const [searchOpen, setSearchOpen] = useState(false);
+    const [user, setUser] = useState(null);
+    const [anchorEl, setAnchorEl] = useState(null);
+
+    useEffect(() => {
+        // Get initial session
+        supabase.auth.getSession().then(({ data: { session } }) => {
+            setUser(session?.user ?? null);
+        });
+
+        // Listen for auth changes
+        const {
+            data: { subscription },
+        } = supabase.auth.onAuthStateChange((_event, session) => {
+            setUser(session?.user ?? null);
+        });
+
+        return () => subscription.unsubscribe();
+    }, []);
+
+    const handleMenuOpen = (event) => setAnchorEl(event.currentTarget);
+    const handleMenuClose = () => setAnchorEl(null);
+
+    const handleLogout = async () => {
+        await supabase.auth.signOut();
+        handleMenuClose();
+    };
 
     const menuVariants = {
         closed: { x: "-100%", transition: { type: "tween", duration: 0.3 } },
@@ -42,12 +72,34 @@ const Navbar = () => {
                             Free shipping, 30-day return or refund guarantee.
                         </p>
                         <div className="flex gap-6 items-center text-[13px] font-bold uppercase tracking-widest">
-                            <a
-                                href="#"
-                                className="hover:text-primary transition-colors"
-                            >
-                                Sign In
-                            </a>
+                            {user ? (
+                                <div className="flex items-center gap-4">
+                                    <span className="text-primary normal-case font-medium">
+                                        {user.email}
+                                    </span>
+                                    <button
+                                        onClick={handleLogout}
+                                        className="hover:text-primary transition-colors flex items-center gap-1 cursor-pointer"
+                                    >
+                                        Logout
+                                    </button>
+                                </div>
+                            ) : (
+                                <>
+                                    <NavLink
+                                        to="/signin"
+                                        className="hover:text-primary transition-colors"
+                                    >
+                                        Sign In
+                                    </NavLink>
+                                    <NavLink
+                                        to="/signup"
+                                        className="hover:text-primary transition-colors"
+                                    >
+                                        Sign Up
+                                    </NavLink>
+                                </>
+                            )}
                             <NavLink
                                 to="/faqs"
                                 className="hover:text-primary transition-colors"
@@ -110,6 +162,64 @@ const Navbar = () => {
 
                         {/* Icons */}
                         <div className="md:w-1/4 flex justify-end items-center gap-2 md:gap-3">
+                            {/* User Account Mobile/Desktop Icon */}
+                            <div className="md:hidden">
+                                {user ? (
+                                    <IconButton
+                                        size="small"
+                                        onClick={handleMenuOpen}
+                                    >
+                                        <AccountCircleOutlinedIcon
+                                            sx={{
+                                                fontSize: 22,
+                                                color: "var(--color-primary)",
+                                            }}
+                                        />
+                                    </IconButton>
+                                ) : (
+                                    <NavLink to="/signin">
+                                        <IconButton size="small">
+                                            <AccountCircleOutlinedIcon
+                                                sx={{
+                                                    fontSize: 22,
+                                                    color: "var(--color-dark)",
+                                                }}
+                                            />
+                                        </IconButton>
+                                    </NavLink>
+                                )}
+                            </div>
+
+                            <Menu
+                                anchorEl={anchorEl}
+                                open={Boolean(anchorEl)}
+                                onClose={handleMenuClose}
+                                sx={{
+                                    "& .MuiPaper-root": {
+                                        borderRadius: 0,
+                                        mt: 1,
+                                        minWidth: 150,
+                                        boxShadow: "0 10px 15px -3px rgba(0,0,0,0.1)",
+                                    },
+                                }}
+                            >
+                                <MenuItem disabled sx={{ fontSize: "12px", fontWeight: 700 }}>
+                                    {user?.email}
+                                </MenuItem>
+                                <MenuItem
+                                    onClick={handleLogout}
+                                    sx={{
+                                        fontSize: "12px",
+                                        fontWeight: 700,
+                                        textTransform: "uppercase",
+                                        letterSpacing: "1px",
+                                        gap: 1,
+                                    }}
+                                >
+                                    <LogoutIcon sx={{ fontSize: 16 }} /> Logout
+                                </MenuItem>
+                            </Menu>
+
                             {/* Search */}
                             <IconButton
                                 size="small"
@@ -220,6 +330,26 @@ const Navbar = () => {
                                             </NavLink>
                                         </li>
                                     ))}
+                                    {!user && (
+                                        <>
+                                            <li onClick={() => setMobile(false)}>
+                                                <NavLink
+                                                    to="/signin"
+                                                    className="text-lg font-bold uppercase tracking-widest block text-dark hover:text-primary"
+                                                >
+                                                    Sign In
+                                                </NavLink>
+                                            </li>
+                                            <li onClick={() => setMobile(false)}>
+                                                <NavLink
+                                                    to="/signup"
+                                                    className="text-lg font-bold uppercase tracking-widest block text-dark hover:text-primary"
+                                                >
+                                                    Sign Up
+                                                </NavLink>
+                                            </li>
+                                        </>
+                                    )}
                                     <li onClick={() => setMobile(false)}>
                                         <NavLink
                                             to="/wishlist"
