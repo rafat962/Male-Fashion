@@ -32,3 +32,21 @@ export async function createOrder({ orderData, cartItems }) {
 
     return order;
 }
+
+/**
+ * Fetches all orders for a specific user, including order items
+ * @param {string} userId
+ */
+export async function getUserOrders(userId) {
+    const { data, error } = await supabase
+        .from("orders")
+        .select(`
+            *,
+            order_items (*)
+        `)
+        .eq("user_id", userId)
+        .order("created_at", { ascending: false });
+
+    if (error) throw new Error(error.message);
+    return data;
+}

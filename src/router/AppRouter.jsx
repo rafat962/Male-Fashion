@@ -11,6 +11,7 @@ import FAQs from "../_components/FAQs/FAQs";
 import SignIn from "../_components/Auth/SignIn";
 import SignUp from "../_components/Auth/SignUp";
 import CheckoutPage from "../_components/CartPage/CheckoutPage/Checkoutpage";
+import ProfilePage from "../_components/Profile/ProfilePage";
 
 const AppRouter = () => {
     return (
@@ -19,6 +20,7 @@ const AppRouter = () => {
                 <Route element={<Layout />}>
                     <Route index element={<HomePage />} />
                     <Route path="shop" element={<ShopPage />} />
+                    <Route path="profile" element={<ProfilePage />} />
                     <Route path="faqs" element={<FAQs />} />
                     <Route path="signin" element={<SignIn />} />
                     <Route path="signup" element={<SignUp />} />

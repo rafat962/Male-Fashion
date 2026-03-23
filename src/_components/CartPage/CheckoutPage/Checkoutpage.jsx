@@ -1,12 +1,13 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable no-unused-vars */
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
-import CheckoutForm from "./CheckoutForm";
+import CheckoutForm from "./Checkoutform";
 import { useCreateOrder } from "../../../_shared/hooks/useCreateOrder";
 import { useCart } from "../../../context/CartContext";
+import { supabase } from "../../../supabaseClient";
 import toast from "react-hot-toast";
 
 // ── Order Summary Item ──────────────────────────────────
@@ -75,6 +76,13 @@ const CheckoutPage = () => {
     const { cartItems, totalPrice, clearCart } = useCart();
     const navigate = useNavigate();
     const [orderId, setOrderId] = useState(null);
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        supabase.auth.getSession().then(({ data: { session } }) => {
+            setUser(session?.user ?? null);
+        });
+    }, []);
 
     const shipping = totalPrice > 100 ? 0 : 9.99;
     const total = totalPrice + shipping;
@@ -108,6 +116,7 @@ const CheckoutPage = () => {
         placeOrder({
             orderData: {
                 ...formData,
+                user_id: user?.id || null,
                 subtotal: totalPrice,
                 shipping,
                 total,
