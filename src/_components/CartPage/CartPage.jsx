@@ -7,10 +7,10 @@ import { useCart } from "../../context/CartContext";
 
 /* ── Quantity Selector ─────────────────────────────────── */
 const QtySelector = ({ value, onChange }) => (
-    <div className="flex items-center border border-border w-fit">
+    <div className="flex items-center border border-border dark:border-dark-border w-fit">
         <button
             onClick={() => onChange(value - 1)}
-            className="w-8 h-8 text-muted hover:text-primary hover:bg-primary-light
+            className="w-8 h-8 text-muted dark:text-dark-muted hover:text-primary hover:bg-primary-light
                        transition-colors duration-200 text-base"
         >
             −
@@ -20,14 +20,14 @@ const QtySelector = ({ value, onChange }) => (
             min={1}
             value={value}
             onChange={(e) => onChange(parseInt(e.target.value))}
-            className="w-10 h-8 text-center text-sm font-bold text-dark
-                       border-x border-border outline-none bg-white
+            className="w-10 h-8 text-center text-sm font-bold text-dark dark:text-white
+                       border-x border-border dark:border-dark-border outline-none bg-white dark:bg-dark-paper
                        [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none
                        [&::-webkit-inner-spin-button]:appearance-none"
         />
         <button
             onClick={() => onChange(value + 1)}
-            className="w-8 h-8 text-muted hover:text-primary hover:bg-primary-light
+            className="w-8 h-8 text-muted dark:text-dark-muted hover:text-primary hover:bg-primary-light
                        transition-colors duration-200 text-base"
         >
             +
@@ -60,11 +60,11 @@ const CartPage = () => {
     /* ── Empty cart ──────────────────────────────────── */
     if (cartItems.length === 0)
         return (
-            <div className="bg-white min-h-screen">
-                <div className="bg-bg-gray border-b border-border py-4">
+            <div className="bg-white dark:bg-dark-bg min-h-screen">
+                <div className="bg-bg-gray dark:bg-dark-paper border-b border-border dark:border-dark-border py-4">
                     <div
                         className="container-main flex items-center gap-2 text-[10px] font-bold
-                                uppercase tracking-[2px] text-muted"
+                                uppercase tracking-[2px] text-muted dark:text-dark-muted"
                     >
                         <Link
                             to="/"
@@ -80,17 +80,17 @@ const CartPage = () => {
                             Shop
                         </Link>
                         <ChevronRightIcon sx={{ fontSize: 13 }} />
-                        <span className="text-dark">Shopping Cart</span>
+                        <span className="text-dark dark:text-white">Shopping Cart</span>
                     </div>
                 </div>
                 <div className="container-main py-24 flex flex-col items-center text-center">
                     <ShoppingBagOutlinedIcon
                         sx={{ fontSize: 64, color: "var(--color-border)" }}
                     />
-                    <h2 className="text-2xl font-black text-dark mt-6 mb-2">
+                    <h2 className="text-2xl font-black text-dark dark:text-white mt-6 mb-2">
                         Your cart is empty
                     </h2>
-                    <p className="text-sm text-muted mb-8">
+                    <p className="text-sm text-muted dark:text-dark-muted mb-8">
                         Looks like you haven't added anything yet.
                     </p>
                     <Link to="/shop" className="btn-primary">
@@ -101,12 +101,12 @@ const CartPage = () => {
         );
 
     return (
-        <div className="bg-white min-h-screen">
+        <div className="bg-white dark:bg-dark-bg min-h-screen">
             {/* ── Breadcrumb ────────────────────────────── */}
-            <div className="bg-bg-gray border-b border-border py-4">
+            <div className="bg-bg-gray dark:bg-dark-paper border-b border-border dark:border-dark-border py-4">
                 <div
                     className="container-main flex items-center gap-2 text-[10px] font-bold
-                                uppercase tracking-[2px] text-muted"
+                                uppercase tracking-[2px] text-muted dark:text-dark-muted"
                 >
                     <Link
                         to="/"
@@ -122,7 +122,7 @@ const CartPage = () => {
                         Shop
                     </Link>
                     <ChevronRightIcon sx={{ fontSize: 13 }} />
-                    <span className="text-dark">Shopping Cart</span>
+                    <span className="text-dark dark:text-white">Shopping Cart</span>
                 </div>
             </div>
 
@@ -133,13 +133,13 @@ const CartPage = () => {
                         {/* Table Header */}
                         <div
                             className="hidden md:grid grid-cols-[2fr_1fr_1fr_auto] gap-4
-                                        border-b border-border pb-3 mb-2"
+                                        border-b border-border dark:border-dark-border pb-3 mb-2"
                         >
                             {["Product", "Quantity", "Total", ""].map((h) => (
                                 <span
                                     key={h}
                                     className="text-[10px] font-black uppercase
-                                                         tracking-[2px] text-dim"
+                                                         tracking-[2px] text-dim dark:text-dark-muted"
                                 >
                                     {h}
                                 </span>
@@ -147,7 +147,7 @@ const CartPage = () => {
                         </div>
 
                         {/* Cart Items */}
-                        <div className="flex flex-col divide-y divide-border-light">
+                        <div className="flex flex-col divide-y divide-border-light dark:divide-dark-border">
                             {cartItems.map((item) => (
                                 <div
                                     key={item.id}
@@ -158,8 +158,8 @@ const CartPage = () => {
                                     <div className="flex items-center gap-4">
                                         <Link
                                             to={`/product/${item.id}`}
-                                            className="w-20 h-20 bg-bg-light border
-                                                        border-border-light shrink-0 overflow-hidden"
+                                            className="w-20 h-20 bg-bg-light dark:bg-dark-paper border
+                                                        border-border-light dark:border-dark-border shrink-0 overflow-hidden"
                                         >
                                             <img
                                                 src={item.image}
@@ -176,7 +176,7 @@ const CartPage = () => {
                                             </p>
                                             <Link
                                                 to={`/product/${item.id}`}
-                                                className="text-sm font-bold text-dark leading-snug hover:text-primary transition-colors"
+                                                className="text-sm font-bold text-dark dark:text-white leading-snug hover:text-primary transition-colors"
                                             >
                                                 {item.name}
                                             </Link>
@@ -198,7 +198,7 @@ const CartPage = () => {
 
                                     {/* Total */}
                                     <div>
-                                        <span className="text-base font-black text-dark">
+                                        <span className="text-base font-black text-dark dark:text-white">
                                             $
                                             {(
                                                 item.price * item.quantity
@@ -224,7 +224,7 @@ const CartPage = () => {
                         {/* Action Buttons */}
                         <div
                             className="flex items-center justify-between mt-6 pt-6
-                                        border-t border-border flex-wrap gap-3"
+                                        border-t border-border dark:border-dark-border flex-wrap gap-3"
                         >
                             <Link to="/shop" className="btn-outline text-xs">
                                 ← Continue Shopping
@@ -232,7 +232,7 @@ const CartPage = () => {
                             <button
                                 onClick={clearCart}
                                 className="text-[11px] font-bold uppercase tracking-[2px]
-                                           text-muted hover:text-primary transition-colors duration-200"
+                                           text-muted dark:text-dark-muted hover:text-primary transition-colors duration-200"
                             >
                                 Clear Cart
                             </button>
@@ -242,10 +242,10 @@ const CartPage = () => {
                     {/* ── Right: Summary ────────────────── */}
                     <div className="lg:w-80 shrink-0 flex flex-col gap-5">
                         {/* Coupon */}
-                        <div className="border border-border p-5">
+                        <div className="border border-border dark:border-dark-border p-5">
                             <h6
                                 className="text-[10px] font-black uppercase tracking-[2px]
-                                           text-dark mb-4"
+                                           text-dark dark:text-white mb-4"
                             >
                                 Discount Code
                             </h6>
@@ -255,8 +255,8 @@ const CartPage = () => {
                                     placeholder="Enter coupon code"
                                     value={coupon}
                                     onChange={(e) => setCoupon(e.target.value)}
-                                    className="flex-1 border border-border border-r-0 px-3
-                                               text-sm outline-none focus:border-dark
+                                    className="flex-1 border border-border dark:border-dark-border border-r-0 px-3
+                                               text-sm outline-none focus:border-dark dark:focus:border-white dark:bg-dark-paper dark:text-white
                                                transition-colors duration-200 h-10"
                                 />
                                 <button
@@ -282,20 +282,20 @@ const CartPage = () => {
                         </div>
 
                         {/* Cart Total */}
-                        <div className="border border-border p-5">
+                        <div className="border border-border dark:border-dark-border p-5">
                             <h6
                                 className="text-[10px] font-black uppercase tracking-[2px]
-                                           text-dark mb-4"
+                                           text-dark dark:text-white mb-4"
                             >
                                 Cart Total
                             </h6>
 
                             <div className="flex flex-col gap-3">
                                 <div className="flex justify-between text-sm">
-                                    <span className="text-sub">
+                                    <span className="text-sub dark:text-dark-muted">
                                         Subtotal
                                     </span>
-                                    <span className="font-bold text-dark">
+                                    <span className="font-bold text-dark dark:text-white">
                                         ${subtotal.toFixed(2)}
                                     </span>
                                 </div>
@@ -312,10 +312,10 @@ const CartPage = () => {
                                 )}
 
                                 <div className="flex justify-between text-sm">
-                                    <span className="text-sub">
+                                    <span className="text-sub dark:text-dark-muted">
                                         Shipping
                                     </span>
-                                    <span className="font-bold text-dark">
+                                    <span className="font-bold text-dark dark:text-white">
                                         {shipping === 0 ? (
                                             <span className="text-green-600">
                                                 Free
@@ -332,9 +332,9 @@ const CartPage = () => {
                                     </p>
                                 )}
 
-                                <div className="border-t border-border pt-3 flex justify-between">
+                                <div className="border-t border-border dark:border-dark-border pt-3 flex justify-between">
                                     <span
-                                        className="text-sm font-black text-dark uppercase
+                                        className="text-sm font-black text-dark dark:text-white uppercase
                                                      tracking-[1px]"
                                     >
                                         Total

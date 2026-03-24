@@ -4,7 +4,7 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
 import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
-import blogPosts from "../../data/Blogposts.json";
+import blogPosts from "../../data/blogPosts.json";
 import Breadcrumb from "../../_shared/ui/Breadcrumb";
 
 const CATEGORIES = ["All", ...new Set(blogPosts.map((p) => p.category))];

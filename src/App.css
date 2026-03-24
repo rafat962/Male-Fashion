@@ -2,6 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;600;700;900&display=swap");
 /* ─── Tailwind v4 ──────────────────────────────────────── */
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 /* ─── Testemonial ──────────────────────────────────────── */
 @keyframes marquee {
     from {
@@ -43,6 +44,13 @@
     --color-text-dim: #777777;
     --color-bg-gray: #f5f5f5;
     --color-bg-light: #f8f8f8;
+
+    /* Dark Mode Colors */
+    --color-dark-bg: #0b0b0b;
+    --color-dark-paper: #1a1a1a;
+    --color-dark-border: #333333;
+    --color-dark-text: #e5e5e5;
+    --color-dark-muted: #a0a0a0;
 
     /* Font */
     --font-sans: "Lato", sans-serif;
@@ -97,6 +105,12 @@
         color: var(--color-dark);
         background-color: #ffffff;
         -webkit-font-smoothing: antialiased;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .dark body {
+        background-color: var(--color-dark-bg);
+        color: var(--color-dark-text);
     }
 
     a {
@@ -138,7 +152,7 @@
     }
 
     .section-title {
-        @apply text-3xl font-bold text-dark text-center mb-10;
+        @apply text-3xl font-bold text-dark text-center mb-10 dark:text-white;
     }
 
     .btn-primary {
@@ -150,7 +164,8 @@
     .btn-outline {
         @apply border border-dark text-dark px-8 py-3 font-bold uppercase
            tracking-[0.15em] text-sm transition-all duration-300 cursor-pointer
-           hover:bg-dark hover:text-white;
+           hover:bg-dark hover:text-white dark:border-white dark:text-white
+           dark:hover:bg-white dark:hover:text-dark;
     }
 
     .badge-new {

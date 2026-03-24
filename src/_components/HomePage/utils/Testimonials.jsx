@@ -5,7 +5,7 @@ const firstRow = reviews.slice(0, reviews.length / 2);
 const secondRow = reviews.slice(reviews.length / 2);
 
 const ReviewCard = ({ img, name, username, body }) => (
-    <figure className="relative w-64 cursor-pointer overflow-hidden rounded-xl border border-border bg-white p-4 hover:shadow-md transition-all">
+    <figure className="relative w-64 cursor-pointer overflow-hidden rounded-xl border border-border dark:border-dark-border bg-white dark:bg-dark-paper p-4 hover:shadow-md transition-all">
         <div className="flex items-center gap-2">
             <img
                 className="rounded-full"
@@ -15,13 +15,13 @@ const ReviewCard = ({ img, name, username, body }) => (
                 alt=""
             />
             <div className="flex flex-col">
-                <figcaption className="text-sm font-bold text-dark">
+                <figcaption className="text-sm font-bold text-dark dark:text-white">
                     {name}
                 </figcaption>
-                <p className="text-xs text-muted">{username}</p>
+                <p className="text-xs text-muted dark:text-dark-muted">{username}</p>
             </div>
         </div>
-        <blockquote className="mt-2 text-sm text-sub leading-relaxed">
+        <blockquote className="mt-2 text-sm text-sub dark:text-dark-text leading-relaxed">
             {body}
         </blockquote>
     </figure>
@@ -29,8 +29,8 @@ const ReviewCard = ({ img, name, username, body }) => (
 
 export default function Testimonial() {
     return (
-        <section className="py-20 bg-bg-light overflow-hidden">
-            <h2 className="text-center text-4xl font-black mb-12 text-dark">
+        <section className="py-20 bg-bg-light dark:bg-dark-bg overflow-hidden">
+            <h2 className="text-center text-4xl font-black mb-12 text-dark dark:text-white">
                 Hear From My Clients
             </h2>
 
@@ -53,8 +53,8 @@ export default function Testimonial() {
                 </Marquee>
 
                 {/* Fade edges */}
-                <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-bg-light z-10"></div>
-                <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-bg-light z-10"></div>
+                <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-bg-light dark:from-dark-bg z-10"></div>
+                <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-bg-light dark:from-dark-bg z-10"></div>
             </div>
         </section>
     );

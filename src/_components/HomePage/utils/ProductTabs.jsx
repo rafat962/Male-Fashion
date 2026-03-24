@@ -19,7 +19,7 @@ const ProductSection = () => {
     );
 
     return (
-        <section className="py-24 bg-white">
+        <section className="py-24 bg-white dark:bg-dark-bg">
             <div className="max-w-[1170px] mx-auto px-4">
                 {/* Tabs Navigation */}
                 <div className="flex justify-center items-center gap-6 md:gap-12 mb-16">
@@ -29,8 +29,8 @@ const ProductSection = () => {
                             onClick={() => setActiveTab(tab.id)}
                             className={`relative text-lg md:text-2xl font-bold tracking-tight transition-all cursor-pointer duration-300 ${
                                 activeTab === tab.id
-                                    ? "text-dark"
-                                    : "text-light-muted hover:text-dark"
+                                    ? "text-dark dark:text-white"
+                                    : "text-light-muted dark:text-dark-muted hover:text-dark dark:hover:text-white"
                             }`}
                         >
                             {tab.label}

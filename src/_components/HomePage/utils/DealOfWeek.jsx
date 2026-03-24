@@ -52,7 +52,7 @@ const DealSection = () => {
     }, []);
 
     return (
-        <section className="bg-bg-gray py-20 overflow-hidden">
+        <section className="bg-bg-gray dark:bg-dark-bg py-20 overflow-hidden">
             <div className="container-main flex flex-col lg:flex-row items-center justify-between gap-12">
                 {/* Left Side: Tabs Selection */}
                 <div className="w-full lg:w-1/4 flex flex-col gap-6 order-2 lg:order-1">
@@ -62,8 +62,8 @@ const DealSection = () => {
                             onClick={() => setActiveTab(cat)}
                             className={`text-left text-2xl lg:text-3xl font-bold transition-all duration-300 ${
                                 activeTab === cat
-                                    ? "text-dark"
-                                    : "text-dim hover:text-sub"
+                                    ? "text-dark dark:text-white"
+                                    : "text-dim dark:text-dark-muted hover:text-sub dark:hover:text-white"
                             }`}
                         >
                             {cat}
@@ -105,7 +105,7 @@ const DealSection = () => {
                     <span className="text-primary font-bold uppercase tracking-widest text-xs mb-4">
                         Deal Of The Week
                     </span>
-                    <h2 className="text-3xl font-bold text-dark mb-8 leading-tight">
+                    <h2 className="text-3xl font-bold text-dark dark:text-white mb-8 leading-tight">
                         Multi-pocket Chest Bag Black
                     </h2>
 
@@ -116,17 +116,17 @@ const DealSection = () => {
                                 key={label}
                                 className="flex flex-col items-center"
                             >
-                                <span className="text-3xl font-bold text-dark">
+                                <span className="text-3xl font-bold text-dark dark:text-white">
                                     {value.toString().padStart(2, "0")}
                                 </span>
-                                <span className="text-xs text-sub capitalize">
+                                <span className="text-xs text-sub dark:text-dark-muted capitalize">
                                     {label}
                                 </span>
                             </div>
                         ))}
                     </div>
 
-                    <button className="bg-dark text-white px-8 py-3 text-xs font-bold uppercase tracking-[2px] hover:bg-primary transition-all cursor-pointer">
+                    <button className="bg-dark dark:bg-white dark:text-dark text-white px-8 py-3 text-xs font-bold uppercase tracking-[2px] hover:bg-primary dark:hover:bg-primary dark:hover:text-white transition-all cursor-pointer">
                         Shop Now
                     </button>
                 </div>

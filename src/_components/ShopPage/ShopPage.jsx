@@ -8,7 +8,7 @@ import {
     filterProducts,
     SORT_OPTIONS,
     PRODUCTS_PER_PAGE,
-} from "./utils/Shoppage.utils";
+} from "./utils/shopPage.utils";
 import Breadcrumb from "../../_shared/ui/Breadcrumb";
 
 const INITIAL_FILTERS = {
@@ -54,7 +54,7 @@ const ShopPage = () => {
     const end = Math.min(page * PRODUCTS_PER_PAGE, total);
 
     return (
-        <div className="bg-white min-h-screen">
+        <div className="bg-white dark:bg-dark-bg min-h-screen transition-colors">
             <Breadcrumb pageName={"Shop"} />
 
             <div className="container-main py-12">
@@ -73,14 +73,14 @@ const ShopPage = () => {
 
                     <div className="flex-1 min-w-0">
                         {/* Top Bar */}
-                        <div className="flex items-center justify-between mb-6 pb-4 border-b border-border">
-                            <p className="text-sm text-sub">
+                        <div className="flex items-center justify-between mb-6 pb-4 border-b border-border dark:border-dark-border">
+                            <p className="text-sm text-sub dark:text-dark-muted">
                                 Showing{" "}
-                                <span className="font-bold text-dark">
+                                <span className="font-bold text-dark dark:text-white">
                                     {start}–{end}
                                 </span>{" "}
                                 of{" "}
-                                <span className="font-bold text-dark">
+                                <span className="font-bold text-dark dark:text-white">
                                     {total}
                                 </span>{" "}
                                 results
@@ -99,6 +99,22 @@ const ShopPage = () => {
                                     minWidth: 180,
                                     "& .MuiOutlinedInput-notchedOutline": {
                                         borderColor: "var(--color-border)",
+                                    },
+                                    "& .MuiSelect-select": {
+                                        color: "var(--color-dark)",
+                                        backgroundColor: "white",
+                                    },
+                                    ".dark &": {
+                                        "& .MuiSelect-select": {
+                                            color: "white",
+                                            backgroundColor: "var(--color-dark-paper)",
+                                        },
+                                        "& .MuiOutlinedInput-notchedOutline": {
+                                            borderColor: "var(--color-dark-border)",
+                                        },
+                                        "& .MuiSvgIcon-root": {
+                                            color: "white",
+                                        },
                                     },
                                 }}
                             >
@@ -141,9 +157,9 @@ const ShopPage = () => {
                                 <motion.div
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
-                                    className="flex flex-col items-center justify-center py-20 text-sub text-center"
+                                    className="flex flex-col items-center justify-center py-20 text-sub dark:text-dark-muted text-center"
                                 >
-                                    <p className="text-2xl font-black text-dark mb-2">
+                                    <p className="text-2xl font-black text-dark dark:text-white mb-2">
                                         No products found
                                     </p>
                                     <p className="text-sm">
@@ -178,7 +194,7 @@ const ShopPage = () => {
                                         key={p}
                                         onClick={() => setPage(p)}
                                         className={`w-9 h-9 text-sm font-bold border transition-all duration-200 cursor-pointer
-                                        ${page === p ? "bg-primary text-white border-primary" : "border-border text-sub hover:border-primary hover:text-primary"}`}
+                                        ${page === p ? "bg-primary text-white border-primary" : "border-border dark:border-dark-border text-sub dark:text-dark-muted hover:border-primary hover:text-primary"}`}
                                     >
                                         {p}
                                     </motion.button>

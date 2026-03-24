@@ -56,7 +56,7 @@ const HeroSlider = () => {
     };
 
     return (
-        <section className="relative bg-bg-gray h-screen min-h-[40rem] overflow-hidden">
+        <section className="relative bg-bg-gray dark:bg-dark-bg h-screen min-h-[40rem] overflow-hidden">
             <AnimatePresence mode="wait">
                 <motion.div
                     key={current}
@@ -76,7 +76,7 @@ const HeroSlider = () => {
                             alt="Hero"
                             className="w-full h-full object-cover object-[75%_center] md:object-center"
                         />
-                        <div className="absolute inset-0 bg-white/40 sm:bg-transparent" />
+                        <div className="absolute inset-0 bg-white/40 dark:bg-black/40 sm:bg-transparent" />
                     </div>
 
                     {/* Content Layer */}
@@ -97,7 +97,7 @@ const HeroSlider = () => {
                                 variants={textVariants}
                                 initial="hidden"
                                 animate="visible"
-                                className="text-dark font-black text-[1.8rem] xs:text-[2.2rem] sm:text-[2.8rem] md:text-[2.9rem] lg:text-[3rem] leading-[1.1] mb-6"
+                                className="text-dark dark:text-white font-black text-[1.8rem] xs:text-[2.2rem] sm:text-[2.8rem] md:text-[2.9rem] lg:text-[3rem] leading-[1.1] mb-6"
                             >
                                 {SLIDES[current].title.split("Collections")[0]}{" "}
                                 <br className="hidden xs:block" />
@@ -110,7 +110,7 @@ const HeroSlider = () => {
                                 variants={textVariants}
                                 initial="hidden"
                                 animate="visible"
-                                className="text-black lg:text-sub text-[0.9rem] md:text-[1rem] leading-relaxed mb-8 max-w-[25rem]"
+                                className="text-black dark:text-dark-muted lg:text-sub text-[0.9rem] md:text-[1rem] leading-relaxed mb-8 max-w-[25rem]"
                             >
                                 {SLIDES[current].description}
                             </motion.p>
@@ -143,7 +143,7 @@ const HeroSlider = () => {
                                     <a
                                         key={social.id}
                                         href={social.link}
-                                        className="text-dark text-[1.1rem] md:text-[1.2rem] hover:text-primary transition-colors duration-300"
+                                        className="text-dark dark:text-white text-[1.1rem] md:text-[1.2rem] hover:text-primary transition-colors duration-300"
                                     >
                                         {social.icon}
                                     </a>
@@ -157,13 +157,13 @@ const HeroSlider = () => {
             {/* Navigation Arrows */}
             <button
                 onClick={prevSlide}
-                className="absolute cursor-pointer left-[2%] top-1/2 -translate-y-1/2 z-20 text-[1.5rem] md:text-[2rem] text-dark/30 hover:text-dark transition-all p-2 hover:scale-110"
+                className="absolute cursor-pointer left-[2%] top-1/2 -translate-y-1/2 z-20 text-[1.5rem] md:text-[2rem] text-dark/30 dark:text-white/30 hover:text-dark dark:hover:text-white transition-all p-2 hover:scale-110"
             >
                 <HiOutlineChevronLeft />
             </button>
             <button
                 onClick={nextSlide}
-                className="absolute cursor-pointer right-[2%] top-1/2 -translate-y-1/2 z-20 text-[1.5rem] md:text-[2rem] text-dark/30 hover:text-dark transition-all p-2 hover:scale-110"
+                className="absolute cursor-pointer right-[2%] top-1/2 -translate-y-1/2 z-20 text-[1.5rem] md:text-[2rem] text-dark/30 dark:text-white/30 hover:text-dark dark:hover:text-white transition-all p-2 hover:scale-110"
             >
                 <HiOutlineChevronRight />
             </button>

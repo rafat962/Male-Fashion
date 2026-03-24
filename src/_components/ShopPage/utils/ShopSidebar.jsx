@@ -2,7 +2,7 @@ import { CATEGORIES, PRICE_RANGES, SIZES, TAGS } from "./Shoppage.utils";
 import SearchIcon from "@mui/icons-material/Search";
 
 const SidebarTitle = ({ children }) => (
-    <h6 className="text-xs font-black uppercase tracking-[0.2em] text-dark mb-4 pb-2 border-b border-border">
+    <h6 className="text-xs font-black uppercase tracking-[0.2em] text-dark dark:text-white mb-4 pb-2 border-b border-border dark:border-dark-border">
         {children}
     </h6>
 );
@@ -13,16 +13,15 @@ const ShopSidebar = ({ filters, onFilterChange }) => {
     return (
         <aside className="flex flex-col gap-8">
             {/* ── Search Bar ──────────────────────────────── */}
-            <div className="relative border border-border group focus-within:border-primary transition-colors">
+            <div className="relative border border-border dark:border-dark-border group focus-within:border-primary transition-colors">
                 <input
                     type="text"
                     placeholder="Search..."
-                    className="w-full px-4 py-3 pr-10 text-sm focus:outline-none bg-transparent"
+                    className="w-full px-4 py-3 pr-10 text-sm focus:outline-none bg-transparent dark:text-white"
                     value={searchTerm || ""}
                     onChange={(e) =>
                         onFilterChange("searchTerm", e.target.value)
                     }
-                    className="w-full px-4 py-3 pr-10 text-sm focus:outline-none bg-transparent"
                 />
                 <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
                     <SearchIcon
@@ -40,7 +39,7 @@ const ShopSidebar = ({ filters, onFilterChange }) => {
                         <button
                             onClick={() => onFilterChange("category", null)}
                             className={`text-sm w-full text-left transition-colors duration-200 cursor-pointer
-                          ${!category ? "text-primary font-bold" : "text-sub hover:text-primary"}`}
+                          ${!category ? "text-primary font-bold" : "text-sub dark:text-dark-muted hover:text-primary"}`}
                         >
                             All Products
                         </button>
@@ -57,7 +56,7 @@ const ShopSidebar = ({ filters, onFilterChange }) => {
                                     )
                                 }
                                 className={`text-sm w-full text-left flex justify-between transition-colors duration-200 cursor-pointer
-                            ${category === cat.label ? "text-primary font-bold" : "text-sub hover:text-primary"}`}
+                            ${category === cat.label ? "text-primary font-bold" : "text-sub dark:text-dark-muted hover:text-primary"}`}
                             >
                                 <span>{cat.label}</span>
                                 <span className="text-[10px] opacity-60">
@@ -85,7 +84,7 @@ const ShopSidebar = ({ filters, onFilterChange }) => {
                                     )
                                 }
                                 className={`text-sm w-full text-left transition-colors duration-200 cursor-pointer
-                              ${priceRange?.label === range.label ? "text-primary font-bold" : "text-sub hover:text-primary"}`}
+                              ${priceRange?.label === range.label ? "text-primary font-bold" : "text-sub dark:text-dark-muted hover:text-primary"}`}
                             >
                                 {range.label}
                             </button>
@@ -105,7 +104,7 @@ const ShopSidebar = ({ filters, onFilterChange }) => {
                                 onFilterChange("size", s === size ? null : s)
                             }
                             className={`w-10 h-10 text-xs font-bold uppercase border transition-all duration-200 cursor-pointer
-                          ${size === s ? "bg-primary text-white border-primary" : "border-border text-sub hover:border-primary hover:text-primary"}`}
+                          ${size === s ? "bg-primary text-white border-primary" : "border-border dark:border-dark-border text-sub dark:text-dark-muted hover:border-primary hover:text-primary"}`}
                         >
                             {s}
                         </button>
@@ -124,7 +123,7 @@ const ShopSidebar = ({ filters, onFilterChange }) => {
                                 onFilterChange("tag", t === tag ? null : t)
                             }
                             className={`text-[11px] font-bold uppercase tracking-widest px-3 py-1.5 border transition-all duration-200 cursor-pointer
-                          ${tag === t ? "bg-primary text-white border-primary" : "border-border text-sub hover:border-primary hover:text-primary"}`}
+                          ${tag === t ? "bg-primary text-white border-primary" : "border-border dark:border-dark-border text-sub dark:text-dark-muted hover:border-primary hover:text-primary"}`}
                         >
                             {t}
                         </button>

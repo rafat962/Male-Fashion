@@ -57,17 +57,17 @@ const SignUp = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-bg-gray py-12 px-4 sm:px-6 lg:px-8">
+        <div className="min-h-screen flex items-center justify-center bg-bg-gray dark:bg-dark-bg py-12 px-4 sm:px-6 lg:px-8 transition-colors">
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="max-w-md w-full space-y-8 bg-white p-10 shadow-sm border border-border"
+                className="max-w-md w-full space-y-8 bg-white dark:bg-dark-paper p-10 shadow-sm border border-border dark:border-dark-border"
             >
                 <div>
-                    <h2 className="text-center text-3xl font-black text-dark uppercase tracking-tight">
+                    <h2 className="text-center text-3xl font-black text-dark dark:text-white uppercase tracking-tight">
                         Create Account
                     </h2>
-                    <p className="mt-2 text-center text-sm text-sub font-medium">
+                    <p className="mt-2 text-center text-sm text-sub dark:text-dark-muted font-medium">
                         Join us and enjoy a better experience.
                     </p>
                 </div>
@@ -75,7 +75,7 @@ const SignUp = () => {
                 <div className="space-y-4">
                     <button
                         onClick={handleGoogleSignUp}
-                        className="w-full flex justify-center items-center gap-3 px-4 py-3 border border-border text-sm font-bold text-dark hover:bg-bg-gray transition-colors duration-200 uppercase tracking-widest"
+                        className="w-full flex justify-center items-center gap-3 px-4 py-3 border border-border dark:border-dark-border text-sm font-bold text-dark dark:text-white hover:bg-bg-gray dark:hover:bg-dark-bg transition-colors duration-200 uppercase tracking-widest"
                     >
                         <FaGoogle className="text-primary" />
                         Sign up with Google
@@ -83,10 +83,10 @@ const SignUp = () => {
 
                     <div className="relative">
                         <div className="absolute inset-0 flex items-center">
-                            <div className="w-full border-t border-border"></div>
+                            <div className="w-full border-t border-border dark:border-dark-border"></div>
                         </div>
                         <div className="relative flex justify-center text-xs uppercase">
-                            <span className="bg-white px-2 text-sub font-bold tracking-widest">
+                            <span className="bg-white dark:bg-dark-paper px-2 text-sub dark:text-dark-muted font-bold tracking-widest">
                                 Or create with email
                             </span>
                         </div>
@@ -95,11 +95,11 @@ const SignUp = () => {
                     <form className="space-y-6" onSubmit={handleSignUp}>
                         <div className="space-y-4">
                             <div className="relative">
-                                <label className="text-[10px] font-black uppercase tracking-[2px] text-dark mb-1 block">
+                                <label className="text-[10px] font-black uppercase tracking-[2px] text-dark dark:text-white mb-1 block">
                                     Full Name
                                 </label>
                                 <div className="relative">
-                                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-sub">
+                                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-sub dark:text-dark-muted">
                                         <FaUser size={14} />
                                     </div>
                                     <input
@@ -107,18 +107,18 @@ const SignUp = () => {
                                         required
                                         value={fullName}
                                         onChange={(e) => setFullName(e.target.value)}
-                                        className="block w-full pl-10 pr-3 py-3 border border-border text-dark text-sm placeholder-dim focus:outline-none focus:border-dark transition-colors"
+                                        className="block w-full pl-10 pr-3 py-3 border border-border dark:border-dark-border text-dark dark:text-white text-sm placeholder-dim bg-transparent focus:outline-none focus:border-dark dark:focus:border-white transition-colors"
                                         placeholder="John Doe"
                                     />
                                 </div>
                             </div>
 
                             <div className="relative">
-                                <label className="text-[10px] font-black uppercase tracking-[2px] text-dark mb-1 block">
+                                <label className="text-[10px] font-black uppercase tracking-[2px] text-dark dark:text-white mb-1 block">
                                     Email Address
                                 </label>
                                 <div className="relative">
-                                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-sub">
+                                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-sub dark:text-dark-muted">
                                         <FaEnvelope size={14} />
                                     </div>
                                     <input
@@ -126,18 +126,18 @@ const SignUp = () => {
                                         required
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
-                                        className="block w-full pl-10 pr-3 py-3 border border-border text-dark text-sm placeholder-dim focus:outline-none focus:border-dark transition-colors"
+                                        className="block w-full pl-10 pr-3 py-3 border border-border dark:border-dark-border text-dark dark:text-white text-sm placeholder-dim bg-transparent focus:outline-none focus:border-dark dark:focus:border-white transition-colors"
                                         placeholder="your@email.com"
                                     />
                                 </div>
                             </div>
 
                             <div className="relative">
-                                <label className="text-[10px] font-black uppercase tracking-[2px] text-dark mb-1 block">
+                                <label className="text-[10px] font-black uppercase tracking-[2px] text-dark dark:text-white mb-1 block">
                                     Password
                                 </label>
                                 <div className="relative">
-                                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-sub">
+                                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-sub dark:text-dark-muted">
                                         <FaLock size={14} />
                                     </div>
                                     <input
@@ -145,28 +145,28 @@ const SignUp = () => {
                                         required
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
-                                        className="block w-full pl-10 pr-3 py-3 border border-border text-dark text-sm placeholder-dim focus:outline-none focus:border-dark transition-colors"
+                                        className="block w-full pl-10 pr-3 py-3 border border-border dark:border-dark-border text-dark dark:text-white text-sm placeholder-dim bg-transparent focus:outline-none focus:border-dark dark:focus:border-white transition-colors"
                                         placeholder="••••••••"
                                     />
                                 </div>
                             </div>
                         </div>
 
-                        <div className="text-[10px] text-sub font-medium leading-relaxed">
+                        <div className="text-[10px] text-sub dark:text-dark-muted font-medium leading-relaxed">
                             By clicking Sign Up, you agree to our{" "}
-                            <a href="#" className="font-bold text-dark hover:text-primary underline">Terms</a> and{" "}
-                            <a href="#" className="font-bold text-dark hover:text-primary underline">Privacy Policy</a>.
+                            <a href="#" className="font-bold text-dark dark:text-white hover:text-primary underline">Terms</a> and{" "}
+                            <a href="#" className="font-bold text-dark dark:text-white hover:text-primary underline">Privacy Policy</a>.
                         </div>
 
                         <button
                             type="submit"
                             disabled={loading}
-                            className="group relative w-full flex justify-center py-4 px-4 bg-dark text-white text-xs font-black uppercase tracking-[2px] hover:bg-primary transition-all duration-300 disabled:bg-sub"
+                            className="group relative w-full flex justify-center py-4 px-4 bg-dark dark:bg-white text-white dark:text-dark text-xs font-black uppercase tracking-[2px] hover:bg-primary dark:hover:bg-primary dark:hover:text-white transition-all duration-300 disabled:bg-sub"
                         >
                             {loading ? "Creating account..." : "Sign Up"}
                             {!loading && (
                                 <span className="absolute right-4 inset-y-0 flex items-center">
-                                    <FaArrowRight className="text-white group-hover:translate-x-1 transition-transform" />
+                                    <FaArrowRight className="text-white dark:text-dark group-hover:translate-x-1 transition-transform" />
                                 </span>
                             )}
                         </button>
@@ -174,11 +174,11 @@ const SignUp = () => {
                 </div>
 
                 <div className="text-center">
-                    <p className="text-sm text-sub font-medium">
+                    <p className="text-sm text-sub dark:text-dark-muted font-medium">
                         Already have an account?{" "}
                         <Link
                             to="/signin"
-                            className="font-black text-dark hover:text-primary transition-colors uppercase tracking-wider underline underline-offset-4 decoration-border hover:decoration-primary"
+                            className="font-black text-dark dark:text-white hover:text-primary transition-colors uppercase tracking-wider underline underline-offset-4 decoration-border dark:decoration-dark-border hover:decoration-primary"
                         >
                             Sign In
                         </Link>

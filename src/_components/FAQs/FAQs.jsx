@@ -29,22 +29,22 @@ const FAQItem = ({ question, answer }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <div className="border-b border-border-light">
+        <div className="border-b border-border-light dark:border-dark-border">
             <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="w-full py-6 flex items-center justify-between text-left group cursor-pointer"
             >
-                <span className={`text-lg font-bold transition-colors ${isOpen ? 'text-primary' : 'text-dark group-hover:text-primary'}`}>
+                <span className={`text-lg font-bold transition-colors ${isOpen ? 'text-primary' : 'text-dark dark:text-white group-hover:text-primary'}`}>
                     {question}
                 </span>
                 <KeyboardArrowDownIcon
-                    className={`transition-transform duration-300 ${isOpen ? 'rotate-180 text-primary' : 'text-text-dim'}`}
+                    className={`transition-transform duration-300 ${isOpen ? 'rotate-180 text-primary' : 'text-text-dim dark:text-dark-muted'}`}
                 />
             </button>
             <div
                 className={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-40 pb-6' : 'max-h-0'}`}
             >
-                <p className="text-muted leading-relaxed">
+                <p className="text-muted dark:text-dark-muted leading-relaxed">
                     {answer}
                 </p>
             </div>
@@ -54,17 +54,17 @@ const FAQItem = ({ question, answer }) => {
 
 const FAQs = () => {
     return (
-        <div className="bg-white min-h-screen">
+        <div className="bg-white dark:bg-dark-bg min-h-screen transition-colors">
             <Breadcrumb pageName="FAQs" />
 
             <div className="container-main py-16 lg:py-24">
                 <div className="max-w-3xl mx-auto">
                     <div className="text-center mb-12">
                         <p className="section-subtitle">Information</p>
-                        <h1 className="text-3xl lg:text-4xl font-black text-dark mb-4">
+                        <h1 className="text-3xl lg:text-4xl font-black text-dark dark:text-white mb-4">
                             Frequently Asked Questions
                         </h1>
-                        <p className="text-muted text-sm">
+                        <p className="text-muted dark:text-dark-muted text-sm">
                             Everything you need to know about our service and products.
                         </p>
                     </div>
@@ -75,11 +75,11 @@ const FAQs = () => {
                         ))}
                     </div>
 
-                    <div className="mt-16 p-8 bg-dim text-center">
-                        <h3 className="text-xl font-bold text-dark mb-2">
+                    <div className="mt-16 p-8 bg-dim dark:bg-dark-paper text-center">
+                        <h3 className="text-xl font-bold text-dark dark:text-white mb-2">
                             Still have questions?
                         </h3>
-                        <p className="text-muted text-sm mb-6">
+                        <p className="text-muted dark:text-dark-muted text-sm mb-6">
                             Can't find the answer you're looking for? Please chat to our friendly team.
                         </p>
                         <button className="btn-primary">

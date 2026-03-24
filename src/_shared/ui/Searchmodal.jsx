@@ -74,13 +74,13 @@ const SearchModal = ({ open, onClose }) => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
                         transition={{ duration: 0.2 }}
-                        className="fixed top-0 left-0 right-0 z-[201] bg-white shadow-2xl
+                        className="fixed top-0 left-0 right-0 z-[201] bg-white dark:bg-dark-paper shadow-2xl
                                    max-h-[80vh] overflow-y-auto"
                     >
                         {/* Search Input */}
                         <div
                             className="container-main py-5 flex items-center gap-4
-                                        border-b border-border-light"
+                                        border-b border-border-light dark:border-dark-border"
                         >
                             <SearchIcon sx={{ fontSize: 22, color: "var(--color-dim)" }} />
                             <input
@@ -89,13 +89,13 @@ const SearchModal = ({ open, onClose }) => {
                                 value={query}
                                 onChange={(e) => setQuery(e.target.value)}
                                 placeholder="Search products..."
-                                className="flex-1 text-lg text-dark outline-none
-                                           placeholder:text-dim font-medium"
+                                className="flex-1 text-lg text-dark dark:text-white outline-none
+                                           placeholder:text-dim bg-transparent font-medium"
                             />
                             <button
                                 onClick={onClose}
                                 className="w-8 h-8 flex items-center justify-center
-                                           text-dim hover:text-dark transition-colors"
+                                           text-dim hover:text-dark dark:hover:text-white transition-colors"
                             >
                                 <CloseIcon sx={{ fontSize: 20 }} />
                             </button>
@@ -110,7 +110,7 @@ const SearchModal = ({ open, onClose }) => {
                             ) : results.length === 0 ? (
                                 <p className="text-sm text-dim py-4 text-center">
                                     No products found for "
-                                    <span className="font-bold text-dark">
+                                    <span className="font-bold text-dark dark:text-white">
                                         {query}
                                     </span>
                                     "
@@ -129,14 +129,14 @@ const SearchModal = ({ open, onClose }) => {
                                             <div
                                                 key={product.id}
                                                 className="flex items-center gap-3 p-3 border
-                                                           border-border-light hover:border-border
+                                                           border-border-light dark:border-dark-border hover:border-border
                                                            transition-colors duration-200"
                                             >
                                                 {/* Image */}
                                                 <Link
                                                     to={`/product/${product.id}`}
                                                     onClick={onClose}
-                                                    className="w-16 h-16 bg-bg-light shrink-0 overflow-hidden"
+                                                    className="w-16 h-16 bg-bg-light dark:bg-dark-bg shrink-0 overflow-hidden"
                                                 >
                                                     <img
                                                         src={product.image}
@@ -156,7 +156,7 @@ const SearchModal = ({ open, onClose }) => {
                                                     <Link
                                                         to={`/product/${product.id}`}
                                                         onClick={onClose}
-                                                        className="block text-sm font-bold text-dark
+                                                        className="block text-sm font-bold text-dark dark:text-white
                                                                   truncate hover:text-primary transition-colors"
                                                     >
                                                         {product.name}
@@ -178,8 +178,8 @@ const SearchModal = ({ open, onClose }) => {
                                                             )
                                                         }
                                                         className="w-7 h-7 flex items-center justify-center
-                                                                   border border-border-light hover:border-primary
-                                                                   hover:text-primary transition-all duration-200"
+                                                                   border border-border-light dark:border-dark-border hover:border-primary
+                                                                   hover:text-primary dark:text-white transition-all duration-200"
                                                     >
                                                         {isWishlisted(
                                                             product.id,
@@ -207,7 +207,7 @@ const SearchModal = ({ open, onClose }) => {
                                                             onClose();
                                                         }}
                                                         className="w-7 h-7 flex items-center justify-center
-                                                                   bg-dark text-white hover:bg-primary
+                                                                   bg-dark dark:bg-white dark:text-dark text-white hover:bg-primary dark:hover:bg-primary dark:hover:text-white
                                                                    transition-colors duration-200"
                                                     >
                                                         <AddShoppingCartIcon
@@ -222,13 +222,13 @@ const SearchModal = ({ open, onClose }) => {
                                     </div>
 
                                     {/* View all */}
-                                    <div className="mt-4 pt-4 border-t border-border-light">
+                                    <div className="mt-4 pt-4 border-t border-border-light dark:border-dark-border">
                                         <Link
                                             to={`/shop`}
                                             onClick={onClose}
                                             className="text-[11px] font-bold uppercase tracking-[2px]
-                                                       text-dark hover:text-primary transition-colors
-                                                       border-b border-dark hover:border-primary pb-0.5"
+                                                       text-dark dark:text-white hover:text-primary transition-colors
+                                                       border-b border-dark dark:border-white hover:border-primary dark:hover:border-primary pb-0.5"
                                         >
                                             View All Results in Shop →
                                         </Link>

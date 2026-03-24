@@ -14,7 +14,7 @@ const ProductCard = ({ product }) => {
             {/* Image Container */}
             <Link
                 to={`/product/${product.id}`}
-                className="relative block aspect-[1/1.15] bg-bg-light mb-4 overflow-hidden"
+                className="relative block aspect-[1/1.15] bg-bg-light dark:bg-dark-paper mb-4 overflow-hidden"
             >
                 {product.badge && (
                     <span
@@ -43,7 +43,7 @@ const ProductCard = ({ product }) => {
                     <div className="absolute inset-0 transition-all duration-300 transform group-hover:-translate-y-full group-hover:opacity-0">
                         <Link
                             to={`/product/${product.id}`}
-                            className="text-[15px] font-bold text-dark truncate hover:text-primary transition-colors"
+                            className="text-[15px] font-bold text-dark dark:text-white truncate hover:text-primary transition-colors"
                         >
                             {product.name}
                         </Link>
@@ -73,11 +73,11 @@ const ProductCard = ({ product }) => {
 
                 {/* 3. Price (Fixed Position) */}
                 <div className="flex items-center gap-3">
-                    <span className="text-[18px] font-black text-dark">
+                    <span className="text-[18px] font-black text-dark dark:text-white">
                         ${product.price}
                     </span>
                     {product.oldPrice && (
-                        <span className="text-[14px] text-muted line-through font-medium">
+                        <span className="text-[14px] text-muted dark:text-dark-muted line-through font-medium">
                             ${product.oldPrice}
                         </span>
                     )}

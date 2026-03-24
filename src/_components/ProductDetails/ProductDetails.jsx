@@ -21,13 +21,13 @@ const ProductDetails = () => {
 
     if (!product) {
         return (
-            <div className="bg-white min-h-screen">
+            <div className="bg-white dark:bg-dark-bg min-h-screen">
                 <Breadcrumb pageName="Product Not Found" />
                 <div className="container-main py-24 flex flex-col items-center text-center">
-                    <h2 className="text-2xl font-black text-dark mt-6 mb-2">
+                    <h2 className="text-2xl font-black text-dark dark:text-white mt-6 mb-2">
                         Product Not Found
                     </h2>
-                    <p className="text-sm text-muted mb-8">
+                    <p className="text-sm text-muted dark:text-dark-muted mb-8">
                         The product you are looking for does not exist.
                     </p>
                     <Link to="/shop" className="btn-primary">
@@ -46,13 +46,13 @@ const ProductDetails = () => {
     const wished = isWishlisted(product.id);
 
     return (
-        <div className="bg-white min-h-screen">
+        <div className="bg-white dark:bg-dark-bg min-h-screen">
             <Breadcrumb pageName={product.name} />
 
             <div className="container-main py-12 lg:py-20">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
                     {/* Image Section */}
-                    <div className="bg-bg-light flex items-center justify-center p-8 lg:p-12">
+                    <div className="bg-bg-light dark:bg-dark-paper flex items-center justify-center p-8 lg:p-12">
                         <img
                             src={product.image}
                             alt={product.name}
@@ -65,19 +65,19 @@ const ProductDetails = () => {
                         <p className="text-xs font-bold uppercase tracking-[2px] text-primary mb-2">
                             {product.category}
                         </p>
-                        <h1 className="text-3xl lg:text-4xl font-black text-dark mb-4">
+                        <h1 className="text-3xl lg:text-4xl font-black text-dark dark:text-white mb-4">
                             {product.name}
                         </h1>
 
                         {/* Rating */}
-                        <div className="flex items-center gap-2 mb-6 pb-6 border-b border-border-light">
+                        <div className="flex items-center gap-2 mb-6 pb-6 border-b border-border-light dark:border-dark-border">
                             <Rating
                                 value={product.rating.stars}
                                 readOnly
                                 size="small"
                                 sx={{ color: "var(--color-primary)" }}
                             />
-                            <span className="text-xs text-muted">
+                            <span className="text-xs text-muted dark:text-dark-muted">
                                 ({product.rating.count} reviews)
                             </span>
                         </div>
@@ -88,23 +88,23 @@ const ProductDetails = () => {
                                 ${product.price.toFixed(2)}
                             </span>
                             {product.oldPrice && (
-                                <span className="text-lg text-dim line-through font-medium">
+                                <span className="text-lg text-dim dark:text-dark-muted line-through font-medium">
                                     ${product.oldPrice.toFixed(2)}
                                 </span>
                             )}
                         </div>
 
-                        <p className="text-[#666] leading-relaxed mb-8">
+                        <p className="text-[#666] dark:text-dark-text leading-relaxed mb-8">
                             {product.description || "No description available for this product."}
                         </p>
 
                         {/* Actions */}
                         <div className="flex flex-wrap items-center gap-4 mt-auto">
                             {/* Quantity Selector */}
-                            <div className="flex items-center border border-border h-12">
+                            <div className="flex items-center border border-border dark:border-dark-border h-12">
                                 <button
                                     onClick={() => handleQty(qty - 1)}
-                                    className="w-12 flex items-center justify-center text-dark hover:text-primary transition-colors cursor-pointer text-xl font-bold"
+                                    className="w-12 flex items-center justify-center text-dark dark:text-white hover:text-primary transition-colors cursor-pointer text-xl font-bold"
                                 >
                                     −
                                 </button>
@@ -113,11 +113,11 @@ const ProductDetails = () => {
                                     min={1}
                                     value={qty}
                                     onChange={(e) => handleQty(e.target.value)}
-                                    className="w-12 text-center text-sm font-bold text-dark border-x border-border outline-none bg-transparent"
+                                    className="w-12 text-center text-sm font-bold text-dark dark:text-white border-x border-border dark:border-dark-border outline-none bg-transparent"
                                 />
                                 <button
                                     onClick={() => handleQty(qty + 1)}
-                                    className="w-12 flex items-center justify-center text-dark hover:text-primary transition-colors cursor-pointer text-xl font-bold"
+                                    className="w-12 flex items-center justify-center text-dark dark:text-white hover:text-primary transition-colors cursor-pointer text-xl font-bold"
                                 >
                                     +
                                 </button>
@@ -126,7 +126,7 @@ const ProductDetails = () => {
                             {/* Add to Cart */}
                             <button
                                 onClick={() => addToCart(product, qty)}
-                                className="flex-1 min-w-[200px] h-12 bg-dark text-white text-xs font-bold uppercase tracking-[2px] flex items-center justify-center gap-2 hover:bg-primary transition-colors cursor-pointer"
+                                className="flex-1 min-w-[200px] h-12 bg-dark dark:bg-white dark:text-dark text-white text-xs font-bold uppercase tracking-[2px] flex items-center justify-center gap-2 hover:bg-primary dark:hover:bg-primary dark:hover:text-white transition-colors cursor-pointer"
                             >
                                 <AddShoppingCartIcon sx={{ fontSize: 18 }} />
                                 Add to Cart
@@ -135,7 +135,7 @@ const ProductDetails = () => {
                             {/* Wishlist */}
                             <button
                                 onClick={() => toggleWishlist(product)}
-                                className="w-12 h-12 border border-border flex items-center justify-center hover:border-primary hover:text-primary transition-all cursor-pointer"
+                                className="w-12 h-12 border border-border dark:border-dark-border flex items-center justify-center hover:border-primary hover:text-primary transition-all cursor-pointer dark:text-white"
                             >
                                 {wished ? (
                                     <FavoriteIcon sx={{ fontSize: 20, color: "#e53637" }} />
@@ -146,16 +146,16 @@ const ProductDetails = () => {
                         </div>
 
                         {/* Additional Info */}
-                        <div className="mt-10 pt-10 border-t border-border-light">
+                        <div className="mt-10 pt-10 border-t border-border-light dark:border-dark-border">
                             <ul className="flex flex-col gap-2">
-                                <li className="text-xs uppercase tracking-[1px] text-dark font-bold">
-                                    SKU: <span className="text-muted font-normal">BE-0012{product.id}</span>
+                                <li className="text-xs uppercase tracking-[1px] text-dark dark:text-white font-bold">
+                                    SKU: <span className="text-muted dark:text-dark-muted font-normal">BE-0012{product.id}</span>
                                 </li>
-                                <li className="text-xs uppercase tracking-[1px] text-dark font-bold">
-                                    Categories: <span className="text-muted font-normal">{product.category}</span>
+                                <li className="text-xs uppercase tracking-[1px] text-dark dark:text-white font-bold">
+                                    Categories: <span className="text-muted dark:text-dark-muted font-normal">{product.category}</span>
                                 </li>
-                                <li className="text-xs uppercase tracking-[1px] text-dark font-bold">
-                                    Tags: <span className="text-muted font-normal">{product.tabs?.join(", ")}</span>
+                                <li className="text-xs uppercase tracking-[1px] text-dark dark:text-white font-bold">
+                                    Tags: <span className="text-muted dark:text-dark-muted font-normal">{product.tabs?.join(", ")}</span>
                                 </li>
                             </ul>
                         </div>

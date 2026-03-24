@@ -1,19 +1,23 @@
-import { ThemeProvider, CssBaseline } from "@mui/material";
+import { ThemeProvider as MuiThemeProvider, CssBaseline } from "@mui/material";
 import muiTheme from "./theme/muiTheme";
 import { CartProvider } from "./context/CartContext";
 import AppRouter from "./router/AppRouter";
 import { Toaster } from "react-hot-toast";
 import { WishlistProvider } from "./context/WishlistContext";
+import { ThemeProvider } from "./context/ThemeContext";
+
 const App = () => {
     return (
-        <ThemeProvider theme={muiTheme}>
-            <CssBaseline />
-            <CartProvider>
-                <WishlistProvider>
-                    <AppRouter />
-                    <Toaster position="top-center" reverseOrder={false} />
-                </WishlistProvider>
-            </CartProvider>
+        <ThemeProvider>
+            <MuiThemeProvider theme={muiTheme}>
+                <CssBaseline />
+                <CartProvider>
+                    <WishlistProvider>
+                        <AppRouter />
+                        <Toaster position="top-center" reverseOrder={false} />
+                    </WishlistProvider>
+                </CartProvider>
+            </MuiThemeProvider>
         </ThemeProvider>
     );
 };

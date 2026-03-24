@@ -51,7 +51,7 @@ const imageVariants = {
 
 const BannerSection = () => {
     return (
-        <section className="py-16 bg-bg-light overflow-hidden">
+        <section className="py-16 bg-bg-light dark:bg-dark-paper overflow-hidden">
             {" "}
             {/* تقليل الـ padding الرأسي */}
             <motion.div
@@ -111,11 +111,11 @@ const BannerSection = () => {
                                     {banner.subtitle}
                                 </motion.span>
 
-                                <h2 className="text-3xl lg:text-4xl font-bold text-dark leading-[1.2] mb-5 uppercase tracking-tight">
+                                <h2 className="text-3xl lg:text-4xl font-bold text-dark dark:text-white leading-[1.2] mb-5 uppercase tracking-tight">
                                     {banner.title}
                                 </h2>
 
-                                <p className="text-sub text-sm lg:text-base mb-8 leading-relaxed max-w-sm">
+                                <p className="text-sub dark:text-dark-muted text-sm lg:text-base mb-8 leading-relaxed max-w-sm">
                                     Elevate your wardrobe with our latest{" "}
                                     {banner.title.split(" ")[0]} pieces,
                                     designed for those who appreciate timeless
@@ -124,9 +124,9 @@ const BannerSection = () => {
 
                                 <Link
                                     to="/shop"
-                                    className="group relative flex items-center gap-2 text-[12px] font-bold uppercase tracking-[1px] transition-all"
+                                    className="group relative flex items-center gap-2 text-[12px] font-bold uppercase tracking-[1px] transition-all dark:text-white"
                                 >
-                                    <span className="border-b-[1.5px] border-dark pb-0.5 group-hover:text-primary group-hover:border-primary transition-colors">
+                                    <span className="border-b-[1.5px] border-dark dark:border-white pb-0.5 group-hover:text-primary group-hover:border-primary transition-colors">
                                         Discover More
                                     </span>
                                     <motion.span

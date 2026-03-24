@@ -44,17 +44,17 @@ const SignIn = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-bg-gray py-12 px-4 sm:px-6 lg:px-8">
+        <div className="min-h-screen flex items-center justify-center bg-bg-gray dark:bg-dark-bg py-12 px-4 sm:px-6 lg:px-8 transition-colors">
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="max-w-md w-full space-y-8 bg-white p-10 shadow-sm border border-border"
+                className="max-w-md w-full space-y-8 bg-white dark:bg-dark-paper p-10 shadow-sm border border-border dark:border-dark-border"
             >
                 <div>
-                    <h2 className="text-center text-3xl font-black text-dark uppercase tracking-tight">
+                    <h2 className="text-center text-3xl font-black text-dark dark:text-white uppercase tracking-tight">
                         Sign In
                     </h2>
-                    <p className="mt-2 text-center text-sm text-sub font-medium">
+                    <p className="mt-2 text-center text-sm text-sub dark:text-dark-muted font-medium">
                         Welcome back! Please enter your details.
                     </p>
                 </div>
@@ -62,7 +62,7 @@ const SignIn = () => {
                 <div className="space-y-4">
                     <button
                         onClick={handleGoogleSignIn}
-                        className="w-full flex justify-center items-center gap-3 px-4 py-3 border border-border text-sm font-bold text-dark hover:bg-bg-gray transition-colors duration-200 uppercase tracking-widest"
+                        className="w-full flex justify-center items-center gap-3 px-4 py-3 border border-border dark:border-dark-border text-sm font-bold text-dark dark:text-white hover:bg-bg-gray dark:hover:bg-dark-bg transition-colors duration-200 uppercase tracking-widest"
                     >
                         <FaGoogle className="text-primary" />
                         Sign in with Google
@@ -70,10 +70,10 @@ const SignIn = () => {
 
                     <div className="relative">
                         <div className="absolute inset-0 flex items-center">
-                            <div className="w-full border-t border-border"></div>
+                            <div className="w-full border-t border-border dark:border-dark-border"></div>
                         </div>
                         <div className="relative flex justify-center text-xs uppercase">
-                            <span className="bg-white px-2 text-sub font-bold tracking-widest">
+                            <span className="bg-white dark:bg-dark-paper px-2 text-sub dark:text-dark-muted font-bold tracking-widest">
                                 Or continue with email
                             </span>
                         </div>
@@ -82,11 +82,11 @@ const SignIn = () => {
                     <form className="space-y-6" onSubmit={handleSignIn}>
                         <div className="space-y-4">
                             <div className="relative">
-                                <label className="text-[10px] font-black uppercase tracking-[2px] text-dark mb-1 block">
+                                <label className="text-[10px] font-black uppercase tracking-[2px] text-dark dark:text-white mb-1 block">
                                     Email Address
                                 </label>
                                 <div className="relative">
-                                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-sub">
+                                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-sub dark:text-dark-muted">
                                         <FaEnvelope size={14} />
                                     </div>
                                     <input
@@ -94,18 +94,18 @@ const SignIn = () => {
                                         required
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
-                                        className="block w-full pl-10 pr-3 py-3 border border-border text-dark text-sm placeholder-dim focus:outline-none focus:border-dark transition-colors"
+                                        className="block w-full pl-10 pr-3 py-3 border border-border dark:border-dark-border text-dark dark:text-white text-sm placeholder-dim bg-transparent focus:outline-none focus:border-dark dark:focus:border-white transition-colors"
                                         placeholder="your@email.com"
                                     />
                                 </div>
                             </div>
 
                             <div className="relative">
-                                <label className="text-[10px] font-black uppercase tracking-[2px] text-dark mb-1 block">
+                                <label className="text-[10px] font-black uppercase tracking-[2px] text-dark dark:text-white mb-1 block">
                                     Password
                                 </label>
                                 <div className="relative">
-                                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-sub">
+                                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-sub dark:text-dark-muted">
                                         <FaLock size={14} />
                                     </div>
                                     <input
@@ -113,7 +113,7 @@ const SignIn = () => {
                                         required
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
-                                        className="block w-full pl-10 pr-3 py-3 border border-border text-dark text-sm placeholder-dim focus:outline-none focus:border-dark transition-colors"
+                                        className="block w-full pl-10 pr-3 py-3 border border-border dark:border-dark-border text-dark dark:text-white text-sm placeholder-dim bg-transparent focus:outline-none focus:border-dark dark:focus:border-white transition-colors"
                                         placeholder="••••••••"
                                     />
                                 </div>
@@ -126,11 +126,11 @@ const SignIn = () => {
                                     id="remember-me"
                                     name="remember-me"
                                     type="checkbox"
-                                    className="h-4 w-4 text-primary border-border rounded focus:ring-0"
+                                    className="h-4 w-4 text-primary border-border dark:border-dark-border rounded focus:ring-0"
                                 />
                                 <label
                                     htmlFor="remember-me"
-                                    className="ml-2 block text-xs font-bold text-sub uppercase tracking-wider"
+                                    className="ml-2 block text-xs font-bold text-sub dark:text-dark-muted uppercase tracking-wider"
                                 >
                                     Remember me
                                 </label>
@@ -139,7 +139,7 @@ const SignIn = () => {
                             <div className="text-xs">
                                 <a
                                     href="#"
-                                    className="font-bold text-dark hover:text-primary uppercase tracking-wider transition-colors"
+                                    className="font-bold text-dark dark:text-white hover:text-primary uppercase tracking-wider transition-colors"
                                 >
                                     Forgot password?
                                 </a>
@@ -149,12 +149,12 @@ const SignIn = () => {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="group relative w-full flex justify-center py-4 px-4 bg-dark text-white text-xs font-black uppercase tracking-[2px] hover:bg-primary transition-all duration-300 disabled:bg-sub"
+                            className="group relative w-full flex justify-center py-4 px-4 bg-dark dark:bg-white text-white dark:text-dark text-xs font-black uppercase tracking-[2px] hover:bg-primary dark:hover:bg-primary dark:hover:text-white transition-all duration-300 disabled:bg-sub"
                         >
                             {loading ? "Signing in..." : "Sign In"}
                             {!loading && (
                                 <span className="absolute right-4 inset-y-0 flex items-center">
-                                    <FaArrowRight className="text-white group-hover:translate-x-1 transition-transform" />
+                                    <FaArrowRight className="text-white dark:text-dark group-hover:translate-x-1 transition-transform" />
                                 </span>
                             )}
                         </button>
@@ -162,11 +162,11 @@ const SignIn = () => {
                 </div>
 
                 <div className="text-center">
-                    <p className="text-sm text-sub font-medium">
+                    <p className="text-sm text-sub dark:text-dark-muted font-medium">
                         Don't have an account?{" "}
                         <Link
                             to="/signup"
-                            className="font-black text-dark hover:text-primary transition-colors uppercase tracking-wider underline underline-offset-4 decoration-border hover:decoration-primary"
+                            className="font-black text-dark dark:text-white hover:text-primary transition-colors uppercase tracking-wider underline underline-offset-4 decoration-border dark:decoration-dark-border hover:decoration-primary"
                         >
                             Sign Up
                         </Link>
