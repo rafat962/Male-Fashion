@@ -112,6 +112,32 @@
     ul {
         list-style: none;
     }
+
+    .dark body {
+        background-color: #111111;
+        color: #ffffff;
+    }
+
+    .dark .bg-white {
+        background-color: #1a1a1a !important;
+    }
+
+    .dark .text-dark {
+        color: #ffffff !important;
+    }
+
+    .dark .border-gray-100,
+    .dark .border-b {
+        border-color: #333333 !important;
+    }
+
+    .dark header .bg-white {
+        background-color: #111111 !important;
+    }
+
+    .dark .container-main nav {
+        border-color: #222222 !important;
+    }
 }
 @utility scrollbar-hide {
     /* IE and Edge */

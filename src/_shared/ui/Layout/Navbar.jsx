@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { Badge, IconButton, Menu, MenuItem } from "@mui/material";
 import { motion, AnimatePresence } from "framer-motion";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
@@ -18,6 +18,8 @@ import { useEffect } from "react";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
+import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
+import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 
 const NavLinks = [
     { label: "Home", to: "/" },
@@ -30,7 +32,9 @@ const Navbar = () => {
     const { totalItems, totalPrice } = useCart();
     const { totalWishlist } = useWishlist();
     const navigate = useNavigate();
+    const location = useLocation();
     const [isMobileMenuOpen, setMobile] = useState(false);
+    const [isDarkMode, setIsDarkMode] = useState(false);
     const [searchOpen, setSearchOpen] = useState(false);
     const [user, setUser] = useState(null);
     const [anchorEl, setAnchorEl] = useState(null);
@@ -58,6 +62,13 @@ const Navbar = () => {
         await supabase.auth.signOut();
         handleMenuClose();
     };
+
+    const toggleDarkMode = () => {
+        setIsDarkMode(!isDarkMode);
+        document.documentElement.classList.toggle("dark");
+    };
+
+    const isHomePage = location.pathname === "/";
 
     const menuVariants = {
         closed: { x: "-100%", transition: { type: "tween", duration: 0.3 } },
@@ -191,6 +202,24 @@ const Navbar = () => {
                                     </NavLink>
                                 )}
                             </div>
+
+                            {isHomePage && (
+                                <IconButton
+                                    size="small"
+                                    onClick={toggleDarkMode}
+                                    sx={{
+                                        color: isDarkMode
+                                            ? "var(--color-primary)"
+                                            : "var(--color-dark)",
+                                    }}
+                                >
+                                    {isDarkMode ? (
+                                        <LightModeOutlinedIcon sx={{ fontSize: 22 }} />
+                                    ) : (
+                                        <DarkModeOutlinedIcon sx={{ fontSize: 22 }} />
+                                    )}
+                                </IconButton>
+                            )}
 
                             <Menu
                                 anchorEl={anchorEl}
