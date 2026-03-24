@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion"; // استيراد موشن
 import {
@@ -39,10 +39,20 @@ const SLIDES = [
 const HeroSlider = () => {
     const [current, setCurrent] = useState(0);
 
-    const nextSlide = () =>
+    const nextSlide = useCallback(() => {
         setCurrent((prev) => (prev === SLIDES.length - 1 ? 0 : prev + 1));
+    }, []);
+
     const prevSlide = () =>
         setCurrent((prev) => (prev === 0 ? SLIDES.length - 1 : prev - 1));
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            nextSlide();
+        }, 5000);
+
+        return () => clearInterval(interval);
+    }, [nextSlide, current]);
 
     // إعدادات الأنيميشن للنص
     const textVariants = {
