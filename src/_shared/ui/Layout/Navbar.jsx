@@ -90,10 +90,9 @@ const Navbar = () => {
         <>
             <header className=" w-full top-0 z-50">
                 {/* ── Top Bar ─────────────────────────────── */}
-                <div className="bg-dark py-2.5">
+                <div className="bg-dark py-2.5 hidden md:block">
                     <div className="container-main flex justify-between items-center text-white/90">
-                        {/* Left Side: Message (Hidden on very small screens if needed) */}
-                        <p className="text-[12px] md:text-[13px] font-normal hidden sm:block">
+                        <p className="text-[13px] font-normal">
                             Free shipping, 30-day return or refund guarantee.
                         </p>
                         <div className="flex gap-6 items-center text-[13px] font-bold uppercase tracking-widest">
@@ -248,22 +247,6 @@ const Navbar = () => {
                                 )}
                             </div>
 
-                            <IconButton
-                                size="small"
-                                onClick={toggleDarkMode}
-                                sx={{
-                                    color: isDarkMode
-                                        ? "var(--color-primary)"
-                                        : "var(--color-dark)",
-                                }}
-                            >
-                                {isDarkMode ? (
-                                    <LightModeOutlinedIcon sx={{ fontSize: 22 }} />
-                                ) : (
-                                    <DarkModeOutlinedIcon sx={{ fontSize: 22 }} />
-                                )}
-                            </IconButton>
-
                             <Menu
                                 anchorEl={anchorEl}
                                 open={Boolean(anchorEl)}
@@ -273,15 +256,11 @@ const Navbar = () => {
                                         borderRadius: 0,
                                         mt: 1,
                                         minWidth: 150,
-                                        boxShadow:
-                                            "0 10px 15px -3px rgba(0,0,0,0.1)",
+                                        boxShadow: "0 10px 15px -3px rgba(0,0,0,0.1)",
                                     },
                                 }}
                             >
-                                <MenuItem
-                                    disabled
-                                    sx={{ fontSize: "12px", fontWeight: 700 }}
-                                >
+                                <MenuItem disabled sx={{ fontSize: "12px", fontWeight: 700 }}>
                                     {user?.email}
                                 </MenuItem>
                                 <MenuItem
@@ -297,8 +276,7 @@ const Navbar = () => {
                                         gap: 1,
                                     }}
                                 >
-                                    <PersonOutlineIcon sx={{ fontSize: 16 }} />{" "}
-                                    My Profile
+                                    <PersonOutlineIcon sx={{ fontSize: 16 }} /> My Profile
                                 </MenuItem>
                                 <MenuItem
                                     onClick={handleLogout}
@@ -320,10 +298,7 @@ const Navbar = () => {
                                 onClick={() => setSearchOpen(true)}
                             >
                                 <SearchOutlinedIcon
-                                    sx={{
-                                        fontSize: 22,
-                                        color: "var(--color-dark)",
-                                    }}
+                                    sx={{ fontSize: 22, color: "var(--color-dark)" }}
                                 />
                             </IconButton>
 
@@ -405,9 +380,7 @@ const Navbar = () => {
                                     <IconButton
                                         onClick={() => setMobile(false)}
                                     >
-                                        <CloseIcon
-                                            sx={{ color: "var(--color-dark)" }}
-                                        />
+                                        <CloseIcon sx={{ color: "var(--color-dark)" }} />
                                     </IconButton>
                                 </div>
                                 <ul className="flex flex-col gap-5">
@@ -440,9 +413,7 @@ const Navbar = () => {
                                         </li>
                                     ) : (
                                         <>
-                                            <li
-                                                onClick={() => setMobile(false)}
-                                            >
+                                            <li onClick={() => setMobile(false)}>
                                                 <NavLink
                                                     to="/signin"
                                                     className="text-lg font-bold uppercase tracking-widest block text-dark hover:text-primary"
@@ -450,9 +421,7 @@ const Navbar = () => {
                                                     Sign In
                                                 </NavLink>
                                             </li>
-                                            <li
-                                                onClick={() => setMobile(false)}
-                                            >
+                                            <li onClick={() => setMobile(false)}>
                                                 <NavLink
                                                     to="/signup"
                                                     className="text-lg font-bold uppercase tracking-widest block text-dark hover:text-primary"
