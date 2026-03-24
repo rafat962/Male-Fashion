@@ -11,6 +11,7 @@ import { useCart } from "../../context/CartContext";
 import { useWishlist } from "../../context/WishlistContext";
 import { useCurrency } from "../../context/CurrencyContext";
 import Breadcrumb from "../../_shared/ui/Breadcrumb";
+import ProductCard from "../HomePage/utils/ProductCard";
 
 const ProductDetails = () => {
     const { id } = useParams();
@@ -22,6 +23,13 @@ const ProductDetails = () => {
     const product = useMemo(() => {
         return productsData.find((p) => p.id === parseInt(id));
     }, [id]);
+
+    const relatedProducts = useMemo(() => {
+        if (!product) return [];
+        return productsData
+            .filter((p) => p.category === product.category && p.id !== product.id)
+            .slice(0, 4);
+    }, [product]);
 
     if (!product) {
         return (
@@ -222,6 +230,25 @@ const ProductDetails = () => {
                         </motion.div>
                     </motion.div>
                 </div>
+
+                {/* Related Products Section */}
+                {relatedProducts.length > 0 && (
+                    <div className="mt-24 pt-16 border-t border-border-light">
+                        <div className="text-center mb-12">
+                            <span className="section-subtitle">You May Also Like</span>
+                            <h2 className="text-3xl font-black text-dark uppercase tracking-tight">
+                                Related Products
+                            </h2>
+                        </div>
+                        <div className="flex overflow-x-auto gap-8 pb-4 scrollbar-hide snap-x">
+                            {relatedProducts.map((p) => (
+                                <div key={p.id} className="min-w-[280px] sm:min-w-[calc(50%-1rem)] lg:min-w-[calc(25%-1.5rem)] snap-start">
+                                    <ProductCard product={p} />
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     );

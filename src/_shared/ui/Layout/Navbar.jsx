@@ -247,23 +247,21 @@ const Navbar = () => {
                                 )}
                             </div>
 
-                            {isHomePage && (
-                                <IconButton
-                                    size="small"
-                                    onClick={toggleDarkMode}
-                                    sx={{
-                                        color: isDarkMode
-                                            ? "var(--color-primary)"
-                                            : "var(--color-dark)",
-                                    }}
-                                >
-                                    {isDarkMode ? (
-                                        <LightModeOutlinedIcon sx={{ fontSize: 22 }} />
-                                    ) : (
-                                        <DarkModeOutlinedIcon sx={{ fontSize: 22 }} />
-                                    )}
-                                </IconButton>
-                            )}
+                            <IconButton
+                                size="small"
+                                onClick={toggleDarkMode}
+                                sx={{
+                                    color: isDarkMode
+                                        ? "var(--color-primary)"
+                                        : "var(--color-dark)",
+                                }}
+                            >
+                                {isDarkMode ? (
+                                    <LightModeOutlinedIcon sx={{ fontSize: 22 }} />
+                                ) : (
+                                    <DarkModeOutlinedIcon sx={{ fontSize: 22 }} />
+                                )}
+                            </IconButton>
 
                             <Menu
                                 anchorEl={anchorEl}
