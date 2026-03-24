@@ -2,9 +2,11 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useCart } from "../../../context/CartContext";
+import { useCurrency } from "../../../context/CurrencyContext";
 
 const ProductCard = ({ product }) => {
     const { addToCart } = useCart();
+    const { formatPrice } = useCurrency();
 
     return (
         <motion.div
@@ -80,11 +82,11 @@ const ProductCard = ({ product }) => {
                 {/* 3. Price (Fixed Position) */}
                 <div className="flex items-center gap-3">
                     <span className="text-[18px] font-black text-dark">
-                        ${product.price}
+                        {formatPrice(product.price)}
                     </span>
                     {product.oldPrice && (
                         <span className="text-[14px] text-muted line-through font-medium">
-                            ${product.oldPrice}
+                            {formatPrice(product.oldPrice)}
                         </span>
                     )}
                 </div>

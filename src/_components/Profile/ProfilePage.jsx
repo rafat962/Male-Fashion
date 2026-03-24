@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../supabaseClient";
 import { useUserOrders } from "../../_shared/hooks/useUserOrders";
+import { useCurrency } from "../../context/CurrencyContext";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
@@ -10,6 +11,7 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
 const OrderItem = ({ order }) => {
     const [isOpen, setIsOpen] = useState(false);
+    const { formatPrice } = useCurrency();
 
     return (
         <div className="border border-[#e0e0e0] mb-4 transition-all hover:border-dark">
@@ -49,7 +51,7 @@ const OrderItem = ({ order }) => {
                             Total
                         </p>
                         <p className="text-sm font-black text-primary mt-0.5">
-                            ${order.total.toFixed(2)}
+                            {formatPrice(order.total)}
                         </p>
                     </div>
                     {isOpen ? (
@@ -88,12 +90,12 @@ const OrderItem = ({ order }) => {
                                                     {item.product_name}
                                                 </p>
                                                 <p className="text-xs text-sub mt-0.5">
-                                                    Qty: {item.quantity} × ${item.price.toFixed(2)}
+                                                    Qty: {item.quantity} × {formatPrice(item.price)}
                                                 </p>
                                             </div>
                                         </div>
                                         <p className="text-sm font-bold text-dark">
-                                            ${(item.quantity * item.price).toFixed(2)}
+                                            {formatPrice(item.quantity * item.price)}
                                         </p>
                                     </div>
                                 ))}
@@ -120,17 +122,17 @@ const OrderItem = ({ order }) => {
                                     </h4>
                                     <div className="flex justify-between text-xs">
                                         <span className="text-sub">Subtotal</span>
-                                        <span className="font-bold text-dark">${order.subtotal.toFixed(2)}</span>
+                                        <span className="font-bold text-dark">{formatPrice(order.subtotal)}</span>
                                     </div>
                                     <div className="flex justify-between text-xs">
                                         <span className="text-sub">Shipping</span>
                                         <span className="font-bold text-dark">
-                                            {order.shipping === 0 ? "Free" : `$${order.shipping.toFixed(2)}`}
+                                            {order.shipping === 0 ? "Free" : formatPrice(order.shipping)}
                                         </span>
                                     </div>
                                     <div className="flex justify-between text-sm pt-2 border-t border-[#eee]">
                                         <span className="font-black uppercase tracking-[1px] text-dark">Total</span>
-                                        <span className="font-black text-primary">${order.total.toFixed(2)}</span>
+                                        <span className="font-black text-primary">{formatPrice(order.total)}</span>
                                     </div>
                                 </div>
                             </div>

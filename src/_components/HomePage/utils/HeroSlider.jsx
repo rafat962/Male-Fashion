@@ -21,7 +21,7 @@ const SLIDES = [
     {
         id: 1,
         subtitle: "Summer Collection",
-        title: "Fall - Winter Collections 2030",
+        title: "CLOTHING COLLECTIONS 2030",
         description:
             "A specialist label creating luxury essentials. Ethically crafted with an unwavering commitment to exceptional quality.",
         image: "/hero/hero-1.jpg",
@@ -52,7 +52,7 @@ const HeroSlider = () => {
         }, 5000);
 
         return () => clearInterval(interval);
-    }, [nextSlide, current]);
+    }, [nextSlide]);
 
     // إعدادات الأنيميشن للنص
     const textVariants = {

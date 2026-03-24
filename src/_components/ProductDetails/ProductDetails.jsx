@@ -9,12 +9,14 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import productsData from "../../data/products.json";
 import { useCart } from "../../context/CartContext";
 import { useWishlist } from "../../context/WishlistContext";
+import { useCurrency } from "../../context/CurrencyContext";
 import Breadcrumb from "../../_shared/ui/Breadcrumb";
 
 const ProductDetails = () => {
     const { id } = useParams();
     const { addToCart } = useCart();
     const { toggleWishlist, isWishlisted } = useWishlist();
+    const { formatPrice } = useCurrency();
     const [qty, setQty] = useState(1);
 
     const product = useMemo(() => {
@@ -110,11 +112,11 @@ const ProductDetails = () => {
                             className="flex items-center gap-4 mb-6"
                         >
                             <span className="text-2xl font-black text-primary">
-                                ${product.price.toFixed(2)}
+                                {formatPrice(product.price)}
                             </span>
                             {product.oldPrice && (
                                 <span className="text-lg text-dim line-through font-medium">
-                                    ${product.oldPrice.toFixed(2)}
+                                    {formatPrice(product.oldPrice)}
                                 </span>
                             )}
                         </motion.div>

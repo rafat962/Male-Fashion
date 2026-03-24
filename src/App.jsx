@@ -1,6 +1,7 @@
 import { ThemeProvider, CssBaseline } from "@mui/material";
 import muiTheme from "./theme/muiTheme";
 import { CartProvider } from "./context/CartContext";
+import { CurrencyProvider } from "./context/CurrencyContext";
 import AppRouter from "./router/AppRouter";
 import { Toaster } from "react-hot-toast";
 import { WishlistProvider } from "./context/WishlistContext";
@@ -10,12 +11,14 @@ const App = () => {
         <QueryProvider>
             <ThemeProvider theme={muiTheme}>
                 <CssBaseline />
-                <CartProvider>
-                    <WishlistProvider>
+                <CurrencyProvider>
+                    <CartProvider>
+                        <WishlistProvider>
                         <AppRouter />
                         <Toaster position="top-center" reverseOrder={false} />
-                    </WishlistProvider>
-                </CartProvider>
+                        </WishlistProvider>
+                    </CartProvider>
+                </CurrencyProvider>
             </ThemeProvider>
         </QueryProvider>
     );

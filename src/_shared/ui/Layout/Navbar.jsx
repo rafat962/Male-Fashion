@@ -11,6 +11,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import { useCart } from "../../../context/CartContext";
+import { useCurrency } from "../../../context/CurrencyContext";
 import SearchModal from "../Searchmodal";
 import { useWishlist } from "../../../context/WishlistContext";
 import { supabase } from "../../../supabaseClient";
@@ -30,6 +31,7 @@ const NavLinks = [
 
 const Navbar = () => {
     const { totalItems, totalPrice } = useCart();
+    const { currency, setCurrency, formatPrice, currencies } = useCurrency();
     const { totalWishlist } = useWishlist();
     const navigate = useNavigate();
     const location = useLocation();
@@ -38,6 +40,7 @@ const Navbar = () => {
     const [searchOpen, setSearchOpen] = useState(false);
     const [user, setUser] = useState(null);
     const [anchorEl, setAnchorEl] = useState(null);
+    const [currencyAnchorEl, setCurrencyAnchorEl] = useState(null);
 
     useEffect(() => {
         // Get initial session
@@ -57,6 +60,14 @@ const Navbar = () => {
 
     const handleMenuOpen = (event) => setAnchorEl(event.currentTarget);
     const handleMenuClose = () => setAnchorEl(null);
+
+    const handleCurrencyMenuOpen = (event) => setCurrencyAnchorEl(event.currentTarget);
+    const handleCurrencyMenuClose = () => setCurrencyAnchorEl(null);
+
+    const handleCurrencyChange = (newCurrency) => {
+        setCurrency(newCurrency);
+        handleCurrencyMenuClose();
+    };
 
     const handleLogout = async () => {
         await supabase.auth.signOut();
@@ -119,10 +130,43 @@ const Navbar = () => {
                             >
                                 FAQs
                             </NavLink>
-                            <button className="flex items-center gap-1 hover:text-primary transition-colors">
-                                USD{" "}
+                            <button
+                                onClick={handleCurrencyMenuOpen}
+                                className="flex items-center gap-1 hover:text-primary transition-colors cursor-pointer"
+                            >
+                                {currency}{" "}
                                 <KeyboardArrowDownIcon sx={{ fontSize: 16 }} />
                             </button>
+
+                            <Menu
+                                anchorEl={currencyAnchorEl}
+                                open={Boolean(currencyAnchorEl)}
+                                onClose={handleCurrencyMenuClose}
+                                sx={{
+                                    "& .MuiPaper-root": {
+                                        borderRadius: 0,
+                                        mt: 1,
+                                        minWidth: 100,
+                                        boxShadow: "0 10px 15px -3px rgba(0,0,0,0.1)",
+                                    },
+                                }}
+                            >
+                                {currencies.map((curr) => (
+                                    <MenuItem
+                                        key={curr}
+                                        onClick={() => handleCurrencyChange(curr)}
+                                        selected={curr === currency}
+                                        sx={{
+                                            fontSize: "12px",
+                                            fontWeight: 700,
+                                            textTransform: "uppercase",
+                                            letterSpacing: "1px",
+                                        }}
+                                    >
+                                        {curr}
+                                    </MenuItem>
+                                ))}
+                            </Menu>
                         </div>
                     </div>
                 </div>
@@ -320,7 +364,7 @@ const Navbar = () => {
                                     </IconButton>
                                 </NavLink>
                                 <span className="text-[14px] font-bold text-dark hidden sm:block">
-                                    ${totalPrice.toFixed(2)}
+                                    {formatPrice(totalPrice)}
                                 </span>
                             </div>
                         </div>
