@@ -113,6 +113,7 @@ const CheckoutPage = () => {
             setOrderId(order.id);
         },
         onError: (err) => {
+            console.log(err);
             toast.error("Something went wrong: " + err.message);
         },
     });
