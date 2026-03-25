@@ -1,4 +1,4 @@
-import { CATEGORIES, PRICE_RANGES, SIZES, TAGS } from "./Shoppage.utils";
+import { CATEGORIES, PRICE_RANGES, SIZES, TAGS } from "./shopPage.utils";
 import SearchIcon from "@mui/icons-material/Search";
 
 const SidebarTitle = ({ children }) => (

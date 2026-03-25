@@ -14,9 +14,12 @@ const ProductDetails = () => {
     const { addToCart } = useCart();
     const { toggleWishlist, isWishlisted } = useWishlist();
     const [qty, setQty] = useState(1);
+    const [activeImg, setActiveImg] = useState(null);
 
     const product = useMemo(() => {
-        return productsData.find((p) => p.id === parseInt(id));
+        const found = productsData.find((p) => p.id === parseInt(id));
+        if (found) setActiveImg(found.image);
+        return found;
     }, [id]);
 
     if (!product) {
@@ -45,19 +48,47 @@ const ProductDetails = () => {
 
     const wished = isWishlisted(product.id);
 
+    const relatedProducts = useMemo(() => {
+        return productsData
+            .filter((p) => p.category === product.category && p.id !== product.id)
+            .slice(0, 4);
+    }, [product]);
+
     return (
         <div className="bg-white dark:bg-dark-bg min-h-screen">
             <Breadcrumb pageName={product.name} />
 
             <div className="container-main py-12 lg:py-20">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 mb-20">
                     {/* Image Section */}
-                    <div className="bg-bg-light dark:bg-dark-paper flex items-center justify-center p-8 lg:p-12">
-                        <img
-                            src={product.image}
-                            alt={product.name}
-                            className="max-w-full max-h-[500px] object-contain"
-                        />
+                    <div className="flex flex-col gap-4">
+                        <div className="bg-bg-light dark:bg-dark-paper flex items-center justify-center p-8 lg:p-12 aspect-square overflow-hidden group">
+                            <img
+                                src={activeImg || product.image}
+                                alt={product.name}
+                                className="max-w-full max-h-full object-contain transition-transform duration-500 group-hover:scale-105"
+                            />
+                        </div>
+                        {/* Thumbnail Gallery */}
+                        <div className="grid grid-cols-4 gap-4">
+                            {[product.image, product.image, product.image, product.image].map((img, i) => (
+                                <button
+                                    key={i}
+                                    onClick={() => setActiveImg(img)}
+                                    className={`aspect-square border-2 shrink-0 cursor-pointer transition-all ${
+                                        (activeImg === img && i === 0) || (activeImg === img)
+                                            ? "border-primary shadow-sm"
+                                            : "border-transparent hover:border-border grayscale hover:grayscale-0"
+                                    } bg-bg-light dark:bg-dark-paper p-2 flex items-center justify-center`}
+                                >
+                                    <img
+                                        src={img}
+                                        alt=""
+                                        className="w-full h-full object-contain"
+                                    />
+                                </button>
+                            ))}
+                        </div>
                     </div>
 
                     {/* Info Section */}
@@ -161,6 +192,38 @@ const ProductDetails = () => {
                         </div>
                     </div>
                 </div>
+
+                {/* Related Products Section */}
+                {relatedProducts.length > 0 && (
+                    <div className="mt-20 pt-20 border-t border-border-light dark:border-dark-border">
+                        <div className="text-center mb-12">
+                            <p className="text-xs font-bold uppercase tracking-[3px] text-primary mb-2">Check Out</p>
+                            <h2 className="text-3xl font-black text-dark dark:text-white">Related Products</h2>
+                        </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                            {relatedProducts.map((p) => (
+                                <Link
+                                    key={p.id}
+                                    to={`/product/${p.id}`}
+                                    onClick={() => window.scrollTo(0, 0)}
+                                    className="group"
+                                >
+                                    <div className="aspect-square bg-bg-light dark:bg-dark-paper mb-4 overflow-hidden p-6 flex items-center justify-center">
+                                        <img
+                                            src={p.image}
+                                            alt={p.name}
+                                            className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110"
+                                        />
+                                    </div>
+                                    <h3 className="text-sm font-bold text-dark dark:text-white group-hover:text-primary transition-colors truncate">
+                                        {p.name}
+                                    </h3>
+                                    <p className="text-primary font-black mt-1">${p.price.toFixed(2)}</p>
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     );
