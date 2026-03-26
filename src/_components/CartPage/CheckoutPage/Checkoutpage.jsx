@@ -7,39 +7,43 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import CheckoutForm from "./Checkoutform";
 import { useCreateOrder } from "../../../_shared/hooks/useCreateOrder";
 import { useCart } from "../../../context/CartContext";
+import { useCurrency } from "../../../context/CurrencyContext";
 import { supabase } from "../../../supabaseClient";
 import toast from "react-hot-toast";
 
 // ── Order Summary Item ──────────────────────────────────
-const SummaryItem = ({ item }) => (
-    <div className="flex items-center gap-3 py-3 border-b border-[#f5f5f5] last:border-0">
-        <div className="relative w-14 h-14 bg-[#f8f8f8] border border-[#efefef] shrink-0">
-            <img
-                src={item.image}
-                alt={item.name}
-                className="w-full h-full object-contain p-1"
-            />
-            {/* qty badge */}
-            <span
-                className="absolute -top-2 -right-2 w-5 h-5 bg-[#111] text-white
-                             text-[10px] font-bold rounded-full flex items-center justify-center"
-            >
-                {item.quantity}
+const SummaryItem = ({ item }) => {
+    const { formatPrice } = useCurrency();
+    return (
+        <div className="flex items-center gap-3 py-3 border-b border-[#f5f5f5] last:border-0">
+            <div className="relative w-14 h-14 bg-[#f8f8f8] border border-[#efefef] shrink-0">
+                <img
+                    src={item.image}
+                    alt={item.name}
+                    className="w-full h-full object-contain p-1"
+                />
+                {/* qty badge */}
+                <span
+                    className="absolute -top-2 -right-2 w-5 h-5 bg-[#111] text-white
+                                 text-[10px] font-bold rounded-full flex items-center justify-center"
+                >
+                    {item.quantity}
+                </span>
+            </div>
+            <div className="flex-1 min-w-0">
+                <p className="text-xs font-bold text-[#111] line-clamp-1">
+                    {item.name}
+                </p>
+                <p className="text-[10px] text-[#bbb] uppercase tracking-[1px]">
+                    {item.category}
+                </p>
+            </div>
+            <span className="text-sm font-black text-[#111] shrink-0">
+                {formatPrice(item.price * item.quantity)}
             </span>
         </div>
-        <div className="flex-1 min-w-0">
-            <p className="text-xs font-bold text-[#111] line-clamp-1">
-                {item.name}
-            </p>
-            <p className="text-[10px] text-[#bbb] uppercase tracking-[1px]">
-                {item.category}
-            </p>
-        </div>
-        <span className="text-sm font-black text-[#111] shrink-0">
-            ${(item.price * item.quantity).toFixed(2)}
-        </span>
-    </div>
-);
+    );
+};
 
 // ── Success State ───────────────────────────────────────
 const OrderSuccess = ({ orderId }) => (
@@ -74,6 +78,7 @@ const OrderSuccess = ({ orderId }) => (
 // ── Main Checkout Page ──────────────────────────────────
 const CheckoutPage = () => {
     const { cartItems, totalPrice, clearCart } = useCart();
+    const { formatPrice } = useCurrency();
     const navigate = useNavigate();
     const [orderId, setOrderId] = useState(null);
     const [user, setUser] = useState(null);
@@ -108,7 +113,6 @@ const CheckoutPage = () => {
             setOrderId(order.id);
         },
         onError: (err) => {
-            console.log(err);
             toast.error("Something went wrong: " + err.message);
         },
     });
@@ -194,7 +198,7 @@ const CheckoutPage = () => {
                                         Subtotal
                                     </span>
                                     <span className="font-bold text-[#111]">
-                                        ${totalPrice.toFixed(2)}
+                                        {formatPrice(totalPrice)}
                                     </span>
                                 </div>
                                 <div className="flex justify-between text-sm">
@@ -207,7 +211,7 @@ const CheckoutPage = () => {
                                                 Free
                                             </span>
                                         ) : (
-                                            `$${shipping.toFixed(2)}`
+                                            formatPrice(shipping)
                                         )}
                                     </span>
                                 </div>
@@ -216,7 +220,7 @@ const CheckoutPage = () => {
                                         Total
                                     </span>
                                     <span className="text-xl font-black text-primary">
-                                        ${total.toFixed(2)}
+                                        {formatPrice(total)}
                                     </span>
                                 </div>
                             </div>

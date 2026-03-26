@@ -17,7 +17,6 @@ const ShopSidebar = ({ filters, onFilterChange }) => {
                 <input
                     type="text"
                     placeholder="Search..."
-                    className="w-full px-4 py-3 pr-10 text-sm focus:outline-none bg-transparent"
                     value={searchTerm || ""}
                     onChange={(e) =>
                         onFilterChange("searchTerm", e.target.value)

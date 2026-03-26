@@ -1,7 +1,7 @@
-/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import { supabase } from "../../supabaseClient";
 import { useUserOrders } from "../../_shared/hooks/useUserOrders";
+import { useCurrency } from "../../context/CurrencyContext";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
@@ -11,6 +11,7 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
 const OrderItem = ({ order }) => {
     const [isOpen, setIsOpen] = useState(false);
+    const { formatPrice } = useCurrency();
 
     return (
         <div className="border border-[#e0e0e0] mb-4 transition-all hover:border-dark">
@@ -27,14 +28,11 @@ const OrderItem = ({ order }) => {
                             Order #{order.id.slice(0, 8).toUpperCase()}
                         </p>
                         <p className="text-xs text-sub mt-0.5">
-                            {new Date(order.created_at).toLocaleDateString(
-                                "en-US",
-                                {
-                                    year: "numeric",
-                                    month: "long",
-                                    day: "numeric",
-                                },
-                            )}
+                            {new Date(order.created_at).toLocaleDateString("en-US", {
+                                year: "numeric",
+                                month: "long",
+                                day: "numeric",
+                            })}
                         </p>
                     </div>
                 </div>
@@ -53,7 +51,7 @@ const OrderItem = ({ order }) => {
                             Total
                         </p>
                         <p className="text-sm font-black text-primary mt-0.5">
-                            ${order.total.toFixed(2)}
+                            {formatPrice(order.total)}
                         </p>
                     </div>
                     {isOpen ? (
@@ -92,16 +90,12 @@ const OrderItem = ({ order }) => {
                                                     {item.product_name}
                                                 </p>
                                                 <p className="text-xs text-sub mt-0.5">
-                                                    Qty: {item.quantity} × $
-                                                    {item.price.toFixed(2)}
+                                                    Qty: {item.quantity} × {formatPrice(item.price)}
                                                 </p>
                                             </div>
                                         </div>
                                         <p className="text-sm font-bold text-dark">
-                                            $
-                                            {(
-                                                item.quantity * item.price
-                                            ).toFixed(2)}
+                                            {formatPrice(item.quantity * item.price)}
                                         </p>
                                     </div>
                                 ))}
@@ -127,30 +121,18 @@ const OrderItem = ({ order }) => {
                                         Order Summary
                                     </h4>
                                     <div className="flex justify-between text-xs">
-                                        <span className="text-sub">
-                                            Subtotal
-                                        </span>
-                                        <span className="font-bold text-dark">
-                                            ${order.subtotal.toFixed(2)}
-                                        </span>
+                                        <span className="text-sub">Subtotal</span>
+                                        <span className="font-bold text-dark">{formatPrice(order.subtotal)}</span>
                                     </div>
                                     <div className="flex justify-between text-xs">
-                                        <span className="text-sub">
-                                            Shipping
-                                        </span>
+                                        <span className="text-sub">Shipping</span>
                                         <span className="font-bold text-dark">
-                                            {order.shipping === 0
-                                                ? "Free"
-                                                : `$${order.shipping.toFixed(2)}`}
+                                            {order.shipping === 0 ? "Free" : formatPrice(order.shipping)}
                                         </span>
                                     </div>
                                     <div className="flex justify-between text-sm pt-2 border-t border-[#eee]">
-                                        <span className="font-black uppercase tracking-[1px] text-dark">
-                                            Total
-                                        </span>
-                                        <span className="font-black text-primary">
-                                            ${order.total.toFixed(2)}
-                                        </span>
+                                        <span className="font-black uppercase tracking-[1px] text-dark">Total</span>
+                                        <span className="font-black text-primary">{formatPrice(order.total)}</span>
                                     </div>
                                 </div>
                             </div>
@@ -201,10 +183,7 @@ const ProfilePage = () => {
             {/* Breadcrumb */}
             <div className="bg-[#f5f5f5] border-b border-[#e0e0e0] py-4">
                 <div className="container-main flex items-center gap-2 text-[10px] font-bold uppercase tracking-[2px] text-sub">
-                    <Link
-                        to="/"
-                        className="hover:text-primary transition-colors"
-                    >
+                    <Link to="/" className="hover:text-primary transition-colors">
                         Home
                     </Link>
                     <ChevronRightIcon sx={{ fontSize: 13 }} />
@@ -255,10 +234,7 @@ const ProfilePage = () => {
                         {loadingOrders ? (
                             <div className="space-y-4">
                                 {[1, 2, 3].map((i) => (
-                                    <div
-                                        key={i}
-                                        className="h-24 bg-[#f5f5f5] animate-pulse"
-                                    />
+                                    <div key={i} className="h-24 bg-[#f5f5f5] animate-pulse" />
                                 ))}
                             </div>
                         ) : orders?.length > 0 ? (
@@ -276,10 +252,7 @@ const ProfilePage = () => {
                                 <p className="text-sm font-bold text-dark uppercase tracking-[1px] mb-4">
                                     You haven't placed any orders yet.
                                 </p>
-                                <Link
-                                    to="/shop"
-                                    className="btn-primary inline-block"
-                                >
+                                <Link to="/shop" className="btn-primary inline-block">
                                     Start Shopping
                                 </Link>
                             </div>

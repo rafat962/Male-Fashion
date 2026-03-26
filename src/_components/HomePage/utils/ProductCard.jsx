@@ -2,9 +2,11 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useCart } from "../../../context/CartContext";
+import { useCurrency } from "../../../context/CurrencyContext";
 
 const ProductCard = ({ product }) => {
     const { addToCart } = useCart();
+    const { formatPrice } = useCurrency();
 
     return (
         <motion.div
@@ -17,7 +19,7 @@ const ProductCard = ({ product }) => {
             {/* Image Container */}
             <Link
                 to={`/product/${product.id}`}
-                className="relative block aspect-[1/1.15] bg-bg-light mb-4 overflow-hidden"
+                className="relative block h-[350px] bg-[#f6f6f6] mb-4 overflow-hidden flex items-center justify-center"
             >
                 {product.badge && (
                     <span
@@ -34,7 +36,7 @@ const ProductCard = ({ product }) => {
                 <img
                     src={product.image}
                     alt={product.name}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
             </Link>
 
@@ -80,11 +82,11 @@ const ProductCard = ({ product }) => {
                 {/* 3. Price (Fixed Position) */}
                 <div className="flex items-center gap-3">
                     <span className="text-[18px] font-black text-dark">
-                        ${product.price}
+                        {formatPrice(product.price)}
                     </span>
                     {product.oldPrice && (
                         <span className="text-[14px] text-muted line-through font-medium">
-                            ${product.oldPrice}
+                            {formatPrice(product.oldPrice)}
                         </span>
                     )}
                 </div>

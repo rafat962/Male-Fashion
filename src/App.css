@@ -112,6 +112,68 @@
     ul {
         list-style: none;
     }
+
+    .dark body {
+        background-color: #111111;
+        color: #ffffff;
+    }
+
+    .dark .bg-white {
+        background-color: #1a1a1a !important;
+    }
+
+    .dark .text-dark {
+        color: #ffffff !important;
+    }
+
+    .dark .border-gray-100,
+    .dark .border-b {
+        border-color: #333333 !important;
+    }
+
+    .dark header .bg-white {
+        background-color: #111111 !important;
+    }
+
+    .dark .container-main nav {
+        border-color: #222222 !important;
+    }
+
+    /* Additional Dark Mode Overrides */
+    .dark .bg-bg-light,
+    .dark .bg-bg-gray {
+        background-color: #1a1a1a !important;
+    }
+
+    .dark .text-muted,
+    .dark .text-sub,
+    .dark .text-dim,
+    .dark .text-text-dim {
+        color: #bbbbbb !important;
+    }
+
+    .dark .border,
+    .dark .border-b,
+    .dark .border-t,
+    .dark .border-border,
+    .dark .border-border-light,
+    .dark .border-border-dim {
+        border-color: #333333 !important;
+    }
+
+    .dark input,
+    .dark textarea {
+        color: #ffffff !important;
+    }
+
+    .dark .MuiPaper-root {
+        background-color: #1a1a1a !important;
+        color: #ffffff !important;
+    }
+
+    .dark .MuiMenuItem-root:hover {
+        background-color: #333333 !important;
+    }
 }
 @utility scrollbar-hide {
     /* IE and Edge */

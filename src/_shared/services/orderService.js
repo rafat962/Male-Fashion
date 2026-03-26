@@ -40,12 +40,10 @@ export async function createOrder({ orderData, cartItems }) {
 export async function getUserOrders(userId) {
     const { data, error } = await supabase
         .from("orders")
-        .select(
-            `
+        .select(`
             *,
             order_items (*)
-        `,
-        )
+        `)
         .eq("user_id", userId)
         .order("created_at", { ascending: false });
 

@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { Badge, IconButton, Menu, MenuItem } from "@mui/material";
 import { motion, AnimatePresence } from "framer-motion";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
@@ -11,6 +11,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import { useCart } from "../../../context/CartContext";
+import { useCurrency } from "../../../context/CurrencyContext";
 import SearchModal from "../Searchmodal";
 import { useWishlist } from "../../../context/WishlistContext";
 import { supabase } from "../../../supabaseClient";
@@ -18,6 +19,8 @@ import { useEffect } from "react";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
+import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
+import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 
 const NavLinks = [
     { label: "Home", to: "/" },
@@ -28,12 +31,16 @@ const NavLinks = [
 
 const Navbar = () => {
     const { totalItems, totalPrice } = useCart();
+    const { currency, setCurrency, formatPrice, currencies } = useCurrency();
     const { totalWishlist } = useWishlist();
     const navigate = useNavigate();
+    const location = useLocation();
     const [isMobileMenuOpen, setMobile] = useState(false);
+    const [isDarkMode, setIsDarkMode] = useState(false);
     const [searchOpen, setSearchOpen] = useState(false);
     const [user, setUser] = useState(null);
     const [anchorEl, setAnchorEl] = useState(null);
+    const [currencyAnchorEl, setCurrencyAnchorEl] = useState(null);
 
     useEffect(() => {
         // Get initial session
@@ -54,10 +61,25 @@ const Navbar = () => {
     const handleMenuOpen = (event) => setAnchorEl(event.currentTarget);
     const handleMenuClose = () => setAnchorEl(null);
 
+    const handleCurrencyMenuOpen = (event) => setCurrencyAnchorEl(event.currentTarget);
+    const handleCurrencyMenuClose = () => setCurrencyAnchorEl(null);
+
+    const handleCurrencyChange = (newCurrency) => {
+        setCurrency(newCurrency);
+        handleCurrencyMenuClose();
+    };
+
     const handleLogout = async () => {
         await supabase.auth.signOut();
         handleMenuClose();
     };
+
+    const toggleDarkMode = () => {
+        setIsDarkMode(!isDarkMode);
+        document.documentElement.classList.toggle("dark");
+    };
+
+    const isHomePage = location.pathname === "/";
 
     const menuVariants = {
         closed: { x: "-100%", transition: { type: "tween", duration: 0.3 } },
@@ -68,74 +90,83 @@ const Navbar = () => {
         <>
             <header className=" w-full top-0 z-50">
                 {/* ── Top Bar ─────────────────────────────── */}
-                <div className="bg-dark py-2.5">
+                <div className="bg-dark py-2.5 hidden md:block">
                     <div className="container-main flex justify-between items-center text-white/90">
-                        {/* Left Side: Message (Hidden on very small screens if needed) */}
-                        <p className="text-[12px] md:text-[13px] font-normal hidden sm:block">
+                        <p className="text-[13px] font-normal">
                             Free shipping, 30-day return or refund guarantee.
                         </p>
+                        <div className="flex gap-6 items-center text-[13px] font-bold uppercase tracking-widest">
+                            {user ? (
+                                <div className="flex items-center gap-4">
+                                    <span className="text-primary normal-case font-medium">
+                                        {user.email}
+                                    </span>
+                                    <button
+                                        onClick={handleLogout}
+                                        className="hover:text-primary transition-colors flex items-center gap-1 cursor-pointer"
+                                    >
+                                        Logout
+                                    </button>
+                                </div>
+                            ) : (
+                                <>
+                                    <NavLink
+                                        to="/signin"
+                                        className="hover:text-primary transition-colors"
+                                    >
+                                        Sign In
+                                    </NavLink>
+                                    <NavLink
+                                        to="/signup"
+                                        className="hover:text-primary transition-colors"
+                                    >
+                                        Sign Up
+                                    </NavLink>
+                                </>
+                            )}
+                            <NavLink
+                                to="/faqs"
+                                className="hover:text-primary transition-colors"
+                            >
+                                FAQs
+                            </NavLink>
+                            <button
+                                onClick={handleCurrencyMenuOpen}
+                                className="flex items-center gap-1 hover:text-primary transition-colors cursor-pointer"
+                            >
+                                {currency}{" "}
+                                <KeyboardArrowDownIcon sx={{ fontSize: 16 }} />
+                            </button>
 
-                        {/* Right Side: Auth & Settings */}
-                        <div className="flex gap-4 md:gap-6 items-center text-[11px] md:text-[13px] font-bold uppercase tracking-widest w-full sm:w-auto justify-between sm:justify-end">
-                            <div className="flex items-center gap-4">
-                                {user ? (
-                                    <div className="flex items-center gap-3 md:gap-4">
-                                        <span
-                                            onClick={() => navigate("/profile")}
-                                            className="text-primary normal-case font-medium border-r border-white/20 pr-3 md:pr-4 cursor-pointer"
-                                        >
-                                            {user.email.split("@")[0]}
-                                        </span>
-                                        <button
-                                            onClick={handleLogout}
-                                            className="hover:text-primary transition-colors flex items-center gap-1 cursor-pointer"
-                                        >
-                                            <LogoutIcon
-                                                sx={{
-                                                    fontSize: {
-                                                        xs: 14,
-                                                        md: 16,
-                                                    },
-                                                }}
-                                            />
-                                            <span className="hidden xs:inline">
-                                                Logout
-                                            </span>
-                                        </button>
-                                    </div>
-                                ) : (
-                                    <div className="flex items-center gap-3 md:gap-4 border-r border-white/20 pr-3 md:pr-4">
-                                        <NavLink
-                                            to="/signin"
-                                            className="hover:text-primary transition-colors"
-                                        >
-                                            Sign In
-                                        </NavLink>
-                                        <NavLink
-                                            to="/signup"
-                                            className="hover:text-primary transition-colors"
-                                        >
-                                            Sign Up
-                                        </NavLink>
-                                    </div>
-                                )}
-                            </div>
-
-                            {/* FAQs & Currency */}
-                            <div className="flex items-center gap-4">
-                                <NavLink
-                                    to="/faqs"
-                                    className="hover:text-primary transition-colors hidden xs:block"
-                                >
-                                    FAQs
-                                </NavLink>
-                                <button className="flex items-center gap-1 hover:text-primary transition-colors">
-                                    USD{" "}
-                                    <KeyboardArrowDownIcon
-                                        sx={{ fontSize: 16 }}
-                                    />
-                                </button>
-                            </div>
+                            <Menu
+                                anchorEl={currencyAnchorEl}
+                                open={Boolean(currencyAnchorEl)}
+                                onClose={handleCurrencyMenuClose}
+                                sx={{
+                                    "& .MuiPaper-root": {
+                                        borderRadius: 0,
+                                        mt: 1,
+                                        minWidth: 100,
+                                        boxShadow: "0 10px 15px -3px rgba(0,0,0,0.1)",
+                                    },
+                                }}
+                            >
+                                {currencies.map((curr) => (
+                                    <MenuItem
+                                        key={curr}
+                                        onClick={() => handleCurrencyChange(curr)}
+                                        selected={curr === currency}
+                                        sx={{
+                                            fontSize: "12px",
+                                            fontWeight: 700,
+                                            textTransform: "uppercase",
+                                            letterSpacing: "1px",
+                                        }}
+                                    >
+                                        {curr}
+                                    </MenuItem>
+                                ))}
+                            </Menu>
                         </div>
                     </div>
                 </div>
@@ -225,15 +256,11 @@ const Navbar = () => {
                                         borderRadius: 0,
                                         mt: 1,
                                         minWidth: 150,
-                                        boxShadow:
-                                            "0 10px 15px -3px rgba(0,0,0,0.1)",
+                                        boxShadow: "0 10px 15px -3px rgba(0,0,0,0.1)",
                                     },
                                 }}
                             >
-                                <MenuItem
-                                    disabled
-                                    sx={{ fontSize: "12px", fontWeight: 700 }}
-                                >
+                                <MenuItem disabled sx={{ fontSize: "12px", fontWeight: 700 }}>
                                     {user?.email}
                                 </MenuItem>
                                 <MenuItem
@@ -249,8 +276,7 @@ const Navbar = () => {
                                         gap: 1,
                                     }}
                                 >
-                                    <PersonOutlineIcon sx={{ fontSize: 16 }} />{" "}
-                                    My Profile
+                                    <PersonOutlineIcon sx={{ fontSize: 16 }} /> My Profile
                                 </MenuItem>
                                 <MenuItem
                                     onClick={handleLogout}
@@ -272,10 +298,7 @@ const Navbar = () => {
                                 onClick={() => setSearchOpen(true)}
                             >
                                 <SearchOutlinedIcon
-                                    sx={{
-                                        fontSize: 22,
-                                        color: "var(--color-dark)",
-                                    }}
+                                    sx={{ fontSize: 22, color: "var(--color-dark)" }}
                                 />
                             </IconButton>
 
@@ -323,7 +346,7 @@ const Navbar = () => {
                                     </IconButton>
                                 </NavLink>
                                 <span className="text-[14px] font-bold text-dark hidden sm:block">
-                                    ${totalPrice.toFixed(2)}
+                                    {formatPrice(totalPrice)}
                                 </span>
                             </div>
                         </div>
@@ -357,9 +380,7 @@ const Navbar = () => {
                                     <IconButton
                                         onClick={() => setMobile(false)}
                                     >
-                                        <CloseIcon
-                                            sx={{ color: "var(--color-dark)" }}
-                                        />
+                                        <CloseIcon sx={{ color: "var(--color-dark)" }} />
                                     </IconButton>
                                 </div>
                                 <ul className="flex flex-col gap-5">
@@ -392,9 +413,7 @@ const Navbar = () => {
                                         </li>
                                     ) : (
                                         <>
-                                            <li
-                                                onClick={() => setMobile(false)}
-                                            >
+                                            <li onClick={() => setMobile(false)}>
                                                 <NavLink
                                                     to="/signin"
                                                     className="text-lg font-bold uppercase tracking-widest block text-dark hover:text-primary"
@@ -402,9 +421,7 @@ const Navbar = () => {
                                                     Sign In
                                                 </NavLink>
                                             </li>
-                                            <li
-                                                onClick={() => setMobile(false)}
-                                            >
+                                            <li onClick={() => setMobile(false)}>
                                                 <NavLink
                                                     to="/signup"
                                                     className="text-lg font-bold uppercase tracking-widest block text-dark hover:text-primary"

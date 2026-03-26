@@ -5,10 +5,12 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { useCart } from "../../context/CartContext";
 import { useWishlist } from "../../context/WishlistContext";
+import { useCurrency } from "../../context/CurrencyContext";
 
 const WishlistPage = () => {
     const { wishlistItems, removeFromWishlist } = useWishlist();
     const { addToCart } = useCart();
+    const { formatPrice } = useCurrency();
 
     if (wishlistItems.length === 0)
         return (
@@ -153,7 +155,7 @@ const WishlistPage = () => {
                                     {product.name}
                                 </Link>
                                 <p className="text-base font-black text-primary mb-3">
-                                    ${product.price.toFixed(2)}
+                                    {formatPrice(product.price)}
                                 </p>
 
                                 <button

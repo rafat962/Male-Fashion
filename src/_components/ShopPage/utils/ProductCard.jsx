@@ -6,9 +6,11 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { useCart } from "../../../context/CartContext";
 import { useWishlist } from "../../../context/WishlistContext";
+import { useCurrency } from "../../../context/CurrencyContext";
 
 const ProductCard = ({ product }) => {
     const { addToCart } = useCart();
+    const { formatPrice } = useCurrency();
     const { toggleWishlist, isWishlisted } = useWishlist();
     const [qty, setQty] = useState(1);
 
@@ -100,11 +102,11 @@ const ProductCard = ({ product }) => {
                 {/* Price */}
                 <div className="flex items-center gap-2 mb-3 mt-auto">
                     <span className="text-sm sm:text-base font-black text-primary">
-                        ${product.price.toFixed(2)}
+                        {formatPrice(product.price)}
                     </span>
                     {product.oldPrice && (
                         <span className="text-[10px] sm:text-xs text-sub line-through">
-                            ${product.oldPrice.toFixed(2)}
+                            {formatPrice(product.oldPrice)}
                         </span>
                     )}
                 </div>

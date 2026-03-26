@@ -4,6 +4,7 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import { useCart } from "../../context/CartContext";
+import { useCurrency } from "../../context/CurrencyContext";
 
 /* ── Quantity Selector ─────────────────────────────────── */
 const QtySelector = ({ value, onChange }) => (
@@ -40,6 +41,7 @@ const CartPage = () => {
     const navigate = useNavigate();
     const { cartItems, updateQuantity, removeFromCart, totalPrice, clearCart } =
         useCart();
+    const { formatPrice } = useCurrency();
     const [coupon, setCoupon] = useState("");
     const [discount, setDiscount] = useState(0);
     const [couponMsg, setCouponMsg] = useState("");
@@ -182,7 +184,7 @@ const CartPage = () => {
                                                 {item.name}
                                             </Link>
                                             <p className="text-sm font-black text-primary mt-1">
-                                                ${item.price.toFixed(2)}
+                                                {formatPrice(item.price)}
                                             </p>
                                         </div>
                                     </div>
@@ -200,10 +202,7 @@ const CartPage = () => {
                                     {/* Total */}
                                     <div>
                                         <span className="text-base font-black text-dark">
-                                            $
-                                            {(
-                                                item.price * item.quantity
-                                            ).toFixed(2)}
+                                            {formatPrice(item.price * item.quantity)}
                                         </span>
                                     </div>
 
@@ -295,7 +294,7 @@ const CartPage = () => {
                                 <div className="flex justify-between text-sm">
                                     <span className="text-sub">Subtotal</span>
                                     <span className="font-bold text-dark">
-                                        ${subtotal.toFixed(2)}
+                                        {formatPrice(subtotal)}
                                     </span>
                                 </div>
 
@@ -305,7 +304,7 @@ const CartPage = () => {
                                             Discount
                                         </span>
                                         <span className="font-bold text-green-600">
-                                            −${discount.toFixed(2)}
+                                            −{formatPrice(discount)}
                                         </span>
                                     </div>
                                 )}
@@ -318,7 +317,7 @@ const CartPage = () => {
                                                 Free
                                             </span>
                                         ) : (
-                                            `$${shipping.toFixed(2)}`
+                                            formatPrice(shipping)
                                         )}
                                     </span>
                                 </div>
@@ -337,7 +336,7 @@ const CartPage = () => {
                                         Total
                                     </span>
                                     <span className="text-lg font-black text-primary">
-                                        ${total.toFixed(2)}
+                                        {formatPrice(total)}
                                     </span>
                                 </div>
                             </div>

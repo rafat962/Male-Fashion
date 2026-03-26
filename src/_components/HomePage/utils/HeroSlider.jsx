@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion"; // استيراد موشن
 import {
@@ -21,7 +21,7 @@ const SLIDES = [
     {
         id: 1,
         subtitle: "Summer Collection",
-        title: "Fall - Winter Collections 2030",
+        title: "CLOTHING COLLECTIONS 2030",
         description:
             "A specialist label creating luxury essentials. Ethically crafted with an unwavering commitment to exceptional quality.",
         image: "/hero/hero-1.jpg",
@@ -39,10 +39,20 @@ const SLIDES = [
 const HeroSlider = () => {
     const [current, setCurrent] = useState(0);
 
-    const nextSlide = () =>
+    const nextSlide = useCallback(() => {
         setCurrent((prev) => (prev === SLIDES.length - 1 ? 0 : prev + 1));
+    }, []);
+
     const prevSlide = () =>
         setCurrent((prev) => (prev === 0 ? SLIDES.length - 1 : prev - 1));
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            nextSlide();
+        }, 5000);
+
+        return () => clearInterval(interval);
+    }, [nextSlide]);
 
     // إعدادات الأنيميشن للنص
     const textVariants = {

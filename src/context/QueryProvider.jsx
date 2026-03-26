@@ -11,7 +11,7 @@ const queryClient = new QueryClient({
 const QueryProvider = ({ children }) => (
     <QueryClientProvider client={queryClient}>
         {children}
-        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+        <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
 );
 
