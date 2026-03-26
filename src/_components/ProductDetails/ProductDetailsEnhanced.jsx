@@ -206,9 +206,10 @@ const ProductDetailsEnhanced = () => {
                                         <span className="text-lg text-dim line-through font-medium">
                                             {formatPrice(product.oldPrice)}
                                         </span>
-                                        <span className="text-sm font-bold text-primary bg-primary bg-opacity-10 px-2 py-1">
+                                        <span className="text-sm font-bold text-black bg-primary bg-opacity-10 px-2 py-1">
                                             {Math.round(
-                                                ((product.oldPrice - product.price) /
+                                                ((product.oldPrice -
+                                                    product.price) /
                                                     product.oldPrice) *
                                                     100,
                                             )}
@@ -230,7 +231,10 @@ const ProductDetailsEnhanced = () => {
                             {/* Color Selector */}
                             <div>
                                 <label className="text-xs font-bold uppercase tracking-[1px] text-dark mb-3 block">
-                                    Color: <span className="text-primary">{selectedColor}</span>
+                                    Color:{" "}
+                                    <span className="text-primary">
+                                        {selectedColor}
+                                    </span>
                                 </label>
                                 <div className="flex gap-3">
                                     {colors.map((color) => (
@@ -238,7 +242,9 @@ const ProductDetailsEnhanced = () => {
                                             key={color}
                                             whileHover={{ scale: 1.1 }}
                                             whileTap={{ scale: 0.95 }}
-                                            onClick={() => setSelectedColor(color)}
+                                            onClick={() =>
+                                                setSelectedColor(color)
+                                            }
                                             className={`w-10 h-10 rounded-full border-2 transition-all ${
                                                 selectedColor === color
                                                     ? "border-primary scale-110"
@@ -263,7 +269,10 @@ const ProductDetailsEnhanced = () => {
                             {/* Size Selector */}
                             <div>
                                 <label className="text-xs font-bold uppercase tracking-[1px] text-dark mb-3 block">
-                                    Size: <span className="text-primary">{selectedSize}</span>
+                                    Size:{" "}
+                                    <span className="text-primary">
+                                        {selectedSize}
+                                    </span>
                                 </label>
                                 <div className="flex flex-wrap gap-2">
                                     {sizes.map((size) => (
@@ -271,7 +280,9 @@ const ProductDetailsEnhanced = () => {
                                             key={size}
                                             whileHover={{ scale: 1.05 }}
                                             whileTap={{ scale: 0.95 }}
-                                            onClick={() => setSelectedSize(size)}
+                                            onClick={() =>
+                                                setSelectedSize(size)
+                                            }
                                             className={`px-4 py-2 border-2 text-xs font-bold uppercase tracking-[0.5px] transition-all ${
                                                 selectedSize === size
                                                     ? "bg-primary text-white border-primary"
@@ -300,7 +311,9 @@ const ProductDetailsEnhanced = () => {
                                         type="number"
                                         min={1}
                                         value={qty}
-                                        onChange={(e) => handleQty(e.target.value)}
+                                        onChange={(e) =>
+                                            handleQty(e.target.value)
+                                        }
                                         className="w-12 text-center text-sm font-bold text-dark border-x border-border outline-none bg-transparent"
                                     />
                                     <button
@@ -320,7 +333,9 @@ const ProductDetailsEnhanced = () => {
                                     onClick={() => addToCart(product, qty)}
                                     className="flex-1 h-12 bg-dark text-white text-xs font-bold uppercase tracking-[2px] flex items-center justify-center gap-2 hover:bg-primary transition-colors cursor-pointer"
                                 >
-                                    <AddShoppingCartIcon sx={{ fontSize: 18 }} />
+                                    <AddShoppingCartIcon
+                                        sx={{ fontSize: 18 }}
+                                    />
                                     Add to Cart
                                 </motion.button>
 
@@ -379,7 +394,9 @@ const ProductDetailsEnhanced = () => {
                                 <p className="text-xs font-bold uppercase tracking-[0.5px] text-dark">
                                     Free Shipping
                                 </p>
-                                <p className="text-xs text-muted">On orders over $100</p>
+                                <p className="text-xs text-muted">
+                                    On orders over $100
+                                </p>
                             </motion.div>
 
                             <motion.div
@@ -396,7 +413,9 @@ const ProductDetailsEnhanced = () => {
                                 <p className="text-xs font-bold uppercase tracking-[0.5px] text-dark">
                                     Easy Returns
                                 </p>
-                                <p className="text-xs text-muted">30-day return policy</p>
+                                <p className="text-xs text-muted">
+                                    30-day return policy
+                                </p>
                             </motion.div>
 
                             <motion.div
@@ -413,7 +432,9 @@ const ProductDetailsEnhanced = () => {
                                 <p className="text-xs font-bold uppercase tracking-[0.5px] text-dark">
                                     Secure Payment
                                 </p>
-                                <p className="text-xs text-muted">100% protected</p>
+                                <p className="text-xs text-muted">
+                                    100% protected
+                                </p>
                             </motion.div>
                         </div>
 
@@ -426,25 +447,28 @@ const ProductDetailsEnhanced = () => {
                         >
                             {/* Tab Navigation */}
                             <div className="flex gap-6 mb-6 border-b border-border-light">
-                                {["description", "reviews", "details"].map((tab) => (
-                                    <motion.button
-                                        key={tab}
-                                        onClick={() => setActiveTab(tab)}
-                                        className={`pb-3 text-xs font-bold uppercase tracking-[1px] transition-colors relative ${
-                                            activeTab === tab
-                                                ? "text-primary"
-                                                : "text-muted hover:text-dark"
-                                        }`}
-                                    >
-                                        {tab.charAt(0).toUpperCase() + tab.slice(1)}
-                                        {activeTab === tab && (
-                                            <motion.div
-                                                layoutId="underline"
-                                                className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
-                                            />
-                                        )}
-                                    </motion.button>
-                                ))}
+                                {["description", "reviews", "details"].map(
+                                    (tab) => (
+                                        <motion.button
+                                            key={tab}
+                                            onClick={() => setActiveTab(tab)}
+                                            className={`pb-3 text-xs font-bold uppercase tracking-[1px] transition-colors relative ${
+                                                activeTab === tab
+                                                    ? "text-primary"
+                                                    : "text-muted hover:text-dark"
+                                            }`}
+                                        >
+                                            {tab.charAt(0).toUpperCase() +
+                                                tab.slice(1)}
+                                            {activeTab === tab && (
+                                                <motion.div
+                                                    layoutId="underline"
+                                                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
+                                                />
+                                            )}
+                                        </motion.button>
+                                    ),
+                                )}
                             </div>
 
                             {/* Tab Content */}
@@ -462,8 +486,13 @@ const ProductDetailsEnhanced = () => {
                                         </p>
                                         <ul className="text-sm text-text-dim space-y-2 list-disc list-inside">
                                             <li>Premium quality materials</li>
-                                            <li>Comfortable fit for all-day wear</li>
-                                            <li>Versatile design for any occasion</li>
+                                            <li>
+                                                Comfortable fit for all-day wear
+                                            </li>
+                                            <li>
+                                                Versatile design for any
+                                                occasion
+                                            </li>
                                             <li>Easy care and maintenance</li>
                                         </ul>
                                     </motion.div>
@@ -478,7 +507,8 @@ const ProductDetailsEnhanced = () => {
                                         className="space-y-4"
                                     >
                                         <p className="text-sm font-bold text-dark mb-4">
-                                            Customer Reviews ({product.rating.count})
+                                            Customer Reviews (
+                                            {product.rating.count})
                                         </p>
                                         <div className="space-y-4">
                                             {[1, 2, 3].map((i) => (
@@ -500,7 +530,8 @@ const ProductDetailsEnhanced = () => {
                                                         </span>
                                                     </div>
                                                     <p className="text-xs text-text-dim">
-                                                        Great product! Excellent quality and fast
+                                                        Great product! Excellent
+                                                        quality and fast
                                                         shipping.
                                                     </p>
                                                 </div>
@@ -518,25 +549,33 @@ const ProductDetailsEnhanced = () => {
                                         className="space-y-3"
                                     >
                                         <div className="flex justify-between text-sm">
-                                            <span className="font-bold text-dark">SKU:</span>
+                                            <span className="font-bold text-dark">
+                                                SKU:
+                                            </span>
                                             <span className="text-text-dim">
                                                 BE-0012{product.id}
                                             </span>
                                         </div>
                                         <div className="flex justify-between text-sm">
-                                            <span className="font-bold text-dark">Category:</span>
+                                            <span className="font-bold text-dark">
+                                                Category:
+                                            </span>
                                             <span className="text-text-dim">
                                                 {product.category}
                                             </span>
                                         </div>
                                         <div className="flex justify-between text-sm">
-                                            <span className="font-bold text-dark">Tags:</span>
+                                            <span className="font-bold text-dark">
+                                                Tags:
+                                            </span>
                                             <span className="text-text-dim">
                                                 {product.tabs?.join(", ")}
                                             </span>
                                         </div>
                                         <div className="flex justify-between text-sm">
-                                            <span className="font-bold text-dark">Availability:</span>
+                                            <span className="font-bold text-dark">
+                                                Availability:
+                                            </span>
                                             <span className="text-primary font-bold">
                                                 In Stock
                                             </span>
@@ -552,7 +591,9 @@ const ProductDetailsEnhanced = () => {
                 {relatedProducts.length > 0 && (
                     <div className="mt-24 pt-16 border-t border-border-light">
                         <div className="text-center mb-12">
-                            <span className="section-subtitle">You May Also Like</span>
+                            <span className="section-subtitle">
+                                You May Also Like
+                            </span>
                             <h2 className="text-3xl font-black text-dark uppercase tracking-tight">
                                 Related Products
                             </h2>
